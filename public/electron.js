@@ -1,5 +1,11 @@
 const path = require('path');
-const { app, BrowserWindow, ipcMain, nativeImage } = require('electron');
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  nativeImage,
+  nativeTheme
+} = require('electron');
 const isDev = require('electron-is-dev');
 
 // App Icon. Though `electron-builder` has alt configs
@@ -44,6 +50,10 @@ function createWindow() {
   }
 
   mainWindow.on('closed', () => (mainWindow = null));
+
+  nativeTheme.on('updated', function theThemeHasChanged() {
+    console.log(nativeTheme.shouldUseDarkColors);
+  });
 
   // mainWindow.webContents.on('did-finish-load', () => {
   //   mainWindow.setTitle('nvAux');
