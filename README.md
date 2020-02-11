@@ -15,7 +15,7 @@ yarn && yarn electron-dev
 You can generate a build for macOS, Windows and Linux all in one go with:
 
 ```sh
-yarn electron-build
+yarn electron-pack
 ```
 
 Don't forget to take a peak at `packages.json` for more commands.
