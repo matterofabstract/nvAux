@@ -51,9 +51,6 @@
     "electron-devtools-installer": "^2.2.4",
     "wait-on": "^3.3.0"
   },
-  "prettier": {
-    "singleQuote": true
-  },
   "author": {
     "name": "Ben Keating",
     "email": "ben@abstractly.io",
