@@ -5,6 +5,15 @@
   "main": "public/electron.js",
   "homepage": "./",
   "description": "A personal tool for your professional lifestyle",
+  "scripts": {
+    "start": "BROWSER=none rescripts start",
+    "build": "rescripts build",
+    "test": "rescripts test",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "postinstall": "electron-builder install-app-deps",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "electron-builder -mw"
+  },
   "dependencies": {
     "chokidar": "^3.3.1",
     "electron-store": "^5.1.0",
@@ -15,14 +24,14 @@
     "react-resizable": "^1.10.1",
     "react-scripts": "3.3.1"
   },
-  "scripts": {
-    "start": "BROWSER=none rescripts start",
-    "build": "rescripts build",
-    "test": "rescripts test",
-    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "postinstall": "electron-builder install-app-deps",
-    "preelectron-pack": "yarn build",
-    "electron-pack": "electron-builder -mw"
+  "devDependencies": {
+    "@rescripts/cli": "^0.0.13",
+    "@rescripts/rescript-env": "^0.0.11",
+    "concurrently": "^5.1.0",
+    "electron": "^8.0.0",
+    "electron-builder": "^22.2.0",
+    "electron-devtools-installer": "^2.2.4",
+    "wait-on": "^3.3.0"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,15 +47,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@rescripts/cli": "^0.0.13",
-    "@rescripts/rescript-env": "^0.0.11",
-    "concurrently": "^5.1.0",
-    "electron": "^8.0.0",
-    "electron-builder": "^22.2.0",
-    "electron-devtools-installer": "^2.2.4",
-    "wait-on": "^3.3.0"
   },
   "author": {
     "name": "Ben Keating",
