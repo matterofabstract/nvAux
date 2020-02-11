@@ -1,11 +1,80 @@
 // out: ./style.css, sourcemap: false, compress: true
 
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #1e2124;
+    color: #8b8c8d;
+  }
+  .app button.close-window {
+    color: #525252;
+    &:hover {
+      color: #6a6a6a;
+    }
+    &:active {
+      color: #c4c4c4;
+    }
+  }
+  .mediabar .mediabar-controls .fa-play {
+    color: #b2b2b2;
+  }
+  .omnibar input {
+    background: #232629;
+    border: 1px solid #2d3033;
+    color: white;
+    &:focus {
+      outline: 1px solid #3aabf8;
+      border-radius: 4px;
+    }
+  }
+  .file-list ul li.active {
+    background: #2c313a;
+    // background: #064297;
+    color: white;
+  }
+  .file-content {
+    background: #15181a;
+  }
+}
+
+@media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
+  body {
+    background: #ececec;
+    color: #414141;
+  }
+  .app button.close-window {
+    color: #bdbdbd;
+    &:hover {
+      color: #6a6a6a;
+    }
+    &:active {
+      color: #252525;
+    }
+  }
+  .mediabar .mediabar-controls .fa-play {
+    color: #2c2c2c;
+  }
+  .omnibar input {
+    background: #ffffff;
+    border: 1px solid #c5cacf;
+    color: #1f1f1f;
+    &:focus {
+      outline: 1px solid #3aabf8;
+      border-radius: 4px;
+    }
+  }
+  .file-list ul li.active {
+    background: #2370dd;
+    color: #ffffff;
+  }
+  .file-content {
+    background: #fafafa;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
   position: relative;
-  background: #1e2124;
-  color: #8b8c8d;
   overflow: hidden;
   user-select: none;
 }
@@ -24,20 +93,12 @@ body {
     right: 5px;
     top: 5px;
     font-size: 11px;
-    color: #464646;
     z-index: 999;
     &:hover,
     &:focus,
     &:active {
       outline: none;
       background: none;
-    }
-    &:hover,
-    &:focus {
-      color: #6a6a6a;
-    }
-    &:active {
-      color: #909090;
     }
   }
 }
@@ -50,9 +111,6 @@ body {
     opacity: 0.5;
     svg {
       font-size: 12px;
-    }
-    .fa-play {
-      color: #b2b2b2;
     }
     .fa-backward {
       padding-right: 8px;
@@ -73,11 +131,8 @@ body {
     padding-left: 27px;
     box-sizing: border-box;
     font-family: 'Operator Mono';
-    background: #232629;
-    border: 1px solid #2d3033;
     border-radius: 4px;
     font-size: 14px;
-    color: white;
     &:focus {
       outline: 1px solid #3aabf8;
       border-radius: 4px;
@@ -107,11 +162,6 @@ body {
       text-overflow: ellipsis;
       padding: 2px 2px 2px 10px;
       cursor: default;
-      &.active {
-        background: #2c313a;
-        // background: #064297;
-        color: white;
-      }
     }
   }
   .file-type-symbol {
@@ -142,7 +192,6 @@ body {
   overflow: scroll;
   padding: 10px;
   box-sizing: border-box;
-  background: #15181a;
   font-size: 12px;
   font-family: 'Operator Mono';
 }
