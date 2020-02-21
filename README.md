@@ -7,7 +7,7 @@ A personal tool for your professional lifestyle.
 
 nvAux helps you capture and retrieve things at the speed of thought. At it's core it's a note-taking tool, but through addons you can do a lot of interesting stuff.
 
-![Screenshot of nvAux](https://bpk-disk.s3.us-east-1.amazonaws.com/nvAux-screenshot.png?c=2)
+![Screenshot of nvAux](https://bpk-disk.s3.us-east-1.amazonaws.com/nvAux-screenshot.png?c=3)
 
 ## Development
 
