@@ -4,6 +4,8 @@ import { FaBookmark, FaSoundcloud } from 'react-icons/fa';
 import { IoLogoJavascript } from 'react-icons/io';
 import { ResizableBox } from 'react-resizable';
 
+import { useWindowSize } from '../hooks';
+
 const demoFileList = [
   {
     id: 1,
@@ -90,14 +92,16 @@ function getTypeColor(type) {
 
 export const NxFileList = ({ fileList = demoFileList }) => {
   const [activeFileId, setActiveFileId] = useState();
+  const size = useWindowSize();
+
   return (
-    <ResizableBox height={200} axis={'y'}>
+    <ResizableBox width={size.width} height={200} axis={'y'}>
       <div className="file-list">
         <ul>
           {fileList.map(({ id, name, preview, type }) => (
-            <li
-              key={id}
-              onClick={() => setActiveFileId(id)}
+            <li 
+              key={id} 
+              onClick={() => setActiveFileId(id)} 
               className={`${id === activeFileId && 'active'}`}
             >
               <div style={{ width: 25, display: 'inline-block' }}>
@@ -112,8 +116,8 @@ export const NxFileList = ({ fileList = demoFileList }) => {
                   {type === 'javascript' && <IoLogoJavascript />}
                 </IconContext.Provider>
               </div>
-              <span className="file-name">{name}</span>{' '}
-              <span className="separator">—</span>{' '}
+              <span className="file-name">{name}</span>
+              <span className="separator">—</span>
               <span className="file-preview">{preview}</span>
             </li>
           ))}
