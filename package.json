@@ -1,5 +1,5 @@
 {
-  "name": "nvaux",
+  "name": "nvAux",
   "version": "0.1.0",
   "private": true,
   "main": "public/electron.js",
@@ -49,8 +49,8 @@
     ]
   },
   "author": {
-    "name": "Ben Keating",
-    "email": "ben@abstractly.io",
+    "name": "Abstractly, LLC",
+    "email": "services@abstractly.io",
     "url": "https://nvaux.com"
   },
   "build": {
