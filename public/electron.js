@@ -39,6 +39,7 @@ app.on('ready', () => {
       : `file://${path.join(__dirname, '../build/index.html')}`
   );
   // mainWindow.on('closed', () => (mainWindow = null));
+  mainWindow.setHasShadow(false);
 });
 
 app.on('window-all-closed', () => {
