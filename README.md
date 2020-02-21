@@ -1,5 +1,8 @@
 # nvAux
 
+[![Dependencies](https://david-dm.org/matterofabstract/nvAux.svg)](https://github.com/matterofabstract/nvAux)
+![Github All Releases](https://img.shields.io/github/downloads/matterofabstract/nvAux/total.svg)
+
 A personal tool for your professional lifestyle.
 
 nvAux helps you capture and retrieve things at the speed of thought. At it's core it's a note-taking tool, but through addons you can do a lot of interesting stuff.
