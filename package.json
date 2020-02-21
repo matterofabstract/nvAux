@@ -12,7 +12,7 @@
     "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "postinstall": "electron-builder install-app-deps",
     "preelectron-pack": "yarn build",
-    "electron-pack": "electron-builder -mw"
+    "electron-pack": "electron-builder -mwl"
   },
   "dependencies": {
     "chokidar": "^3.3.1",
