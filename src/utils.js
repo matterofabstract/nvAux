@@ -1,4 +1,4 @@
-/* Return true is the date string supplied is today or in the future.
+/** Return true is the date string supplied is today or in the future.
  *
  * The argument must be a string representing a simplification of the ISO 8601
  * calendar date extended format (other formats may be used, but results are
@@ -11,12 +11,11 @@
  *   false
  *
  */
-export const isTodayOrFuture = jsDateString => {
+export const isTodayOrFuture = (jsDateString) => {
   // Reset hours as we want to include the entire day.
   // Get UNIX timestamp format by multiply by 1000. Working in milliseconds, not seconds.
   const today = new Date().setHours(0, 0, 0, 0) * 1000;
-  const jsDateObj =
-    new Date(Date.parse(jsDateString)).setHours(0, 0, 0, 0) * 1000;
+  const jsDateObj = new Date(Date.parse(jsDateString)).setHours(0, 0, 0, 0) * 1000;
   if (jsDateObj >= today) {
     return true;
   } else {
@@ -24,7 +23,7 @@ export const isTodayOrFuture = jsDateString => {
   }
 };
 
-/* Get Month name or abbreviation from a date string
+/** Get Month name or abbreviation from a date string
  *
  * Usage:
  *   getMonthName('Tue Mar 24 2015 19:00:00 GMT-0500', true)
@@ -56,7 +55,7 @@ export const getMonthNameFromDateString = (dateStr, abbreviated = false) => {
   }
 };
 
-/* Convert a lowercase month abbrevation to month number.
+/** Convert a lowercase month abbrevation to month number.
  *
  * Usage:
  *   getMonthNumberFromMonthName('Mar')
@@ -65,7 +64,7 @@ export const getMonthNameFromDateString = (dateStr, abbreviated = false) => {
  *   3
  *
  */
-export const getMonthNumberFromMonthName = mon => {
+export const getMonthNumberFromMonthName = (mon) => {
   var d = Date.parse(mon + '1, 2020');
   if (!isNaN(d)) {
     return new Date(d).getMonth() + 1;
@@ -73,7 +72,8 @@ export const getMonthNumberFromMonthName = mon => {
   return -1;
 };
 
-/* Return a payload for React's dangerouslySetInnerHTML
+/**
+ * Return a payload for React's dangerouslySetInnerHTML
  *
  * you have to type out dangerouslySetInnerHTML and pass an object with a
  * __html key, to remind yourself that it’s dangerous.
@@ -81,6 +81,39 @@ export const getMonthNumberFromMonthName = mon => {
  * See: https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml
  *
  */
-export const createMarkup = stringWithHtmlMarkup => ({
+export const createMarkup = (stringWithHtmlMarkup) => ({
   __html: stringWithHtmlMarkup
 });
+
+/**
+ * Best-guess at clients system platform.
+ *
+ * Usage:
+ *   getOS()
+ *
+ * Returns:
+ *   macOS
+ */
+export const getOS = () => {
+  const userAgent = window.navigator.userAgent,
+    platform = window.navigator.platform,
+    macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+    windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+    iosPlatforms = ['iPhone', 'iPad', 'iPod'];
+
+  let os = null;
+
+  if (macosPlatforms.indexOf(platform) !== -1) {
+    os = 'macOS';
+  } else if (iosPlatforms.indexOf(platform) !== -1) {
+    os = 'iOS';
+  } else if (windowsPlatforms.indexOf(platform) !== -1) {
+    os = 'Windows';
+  } else if (/Android/.test(userAgent)) {
+    os = 'Android';
+  } else if (!os && /Linux/.test(platform)) {
+    os = 'Linux';
+  }
+
+  return os;
+};
