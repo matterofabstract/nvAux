@@ -1,7 +1,7 @@
 require('./core/');
 
 const path = require('path');
-const { app, BrowserWindow, nativeImage } = require('electron');
+const { app, BrowserWindow } = require('electron');
 
 const { isDev } = require('./utils');
 
