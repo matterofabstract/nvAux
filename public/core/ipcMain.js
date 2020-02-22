@@ -6,5 +6,5 @@ const { ipcMain } = require('electron');
  * (web page). Messages sent from a renderer will be emitted to this module.
  */
 ipcMain.on('app_version', (event) => {
-  event.sender.send('app_version', { version: app.getVersion() });
+  event.sender.send('app_version', { version: electron.app.getVersion() });
 });

@@ -1,4 +1,3 @@
-'use strict';
 const { app, BrowserWindow } = require('electron');
 const { isDev } = require('../utils');
 
