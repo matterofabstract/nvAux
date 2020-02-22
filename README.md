@@ -25,4 +25,4 @@ yarn preelectron-pack && yarn electron-pack
 
 Don't forget to take a peak at `packages.json` for more commands.
 
-![](https://bpk-disk.s3.us-east-1.amazonaws.com/designed-by-abstractly-footer.png)
+![](https://bpk-disk.s3.us-east-1.amazonaws.com/designed-by-abstractly-footer.png?c=1)
