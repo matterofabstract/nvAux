@@ -2,6 +2,7 @@
 
 [![Dependencies](https://david-dm.org/matterofabstract/nvAux.svg)](https://github.com/matterofabstract/nvAux)
 ![Github All Releases](https://img.shields.io/github/downloads/matterofabstract/nvAux/total.svg)
+![Lint](https://github.com/matterofabstract/nvAux/workflows/Lint/badge.svg)
 
 A personal tool for your professional lifestyle.
 
