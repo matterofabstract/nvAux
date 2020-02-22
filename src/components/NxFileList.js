@@ -99,11 +99,7 @@ export const NxFileList = ({ fileList = demoFileList }) => {
       <div className="file-list">
         <ul>
           {fileList.map(({ id, name, preview, type }) => (
-            <li 
-              key={id} 
-              onClick={() => setActiveFileId(id)} 
-              className={`${id === activeFileId && 'active'}`}
-            >
+            <li key={id} onClick={() => setActiveFileId(id)} className={`${id === activeFileId && 'active'}`}>
               <div style={{ width: 25, display: 'inline-block' }}>
                 <IconContext.Provider
                   value={{

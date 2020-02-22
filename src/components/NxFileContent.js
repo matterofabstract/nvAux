@@ -2,9 +2,7 @@ import React from 'react';
 
 import { createMarkup } from '../utils';
 
-const NothingSelected = () => (
-  <div className="nothing-selected">No Note Selected</div>
-);
+const NothingSelected = () => <div className="nothing-selected">No Note Selected</div>;
 
 const demoData = `
   URL examples: http://support.google.com/analytics/answer/1116091?hl=en
@@ -30,11 +28,7 @@ const demoData = `
 export const NxFileContent = ({ data = demoData }) => {
   return (
     <div className="file-content" contentEditable={true}>
-      {data ? (
-        <div dangerouslySetInnerHTML={createMarkup(data)} />
-      ) : (
-        <NothingSelected />
-      )}
+      {data ? <div dangerouslySetInnerHTML={createMarkup(data)} /> : <NothingSelected />}
     </div>
   );
 };
