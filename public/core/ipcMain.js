@@ -1,4 +1,4 @@
-const { ipcMain } = require('electron');
+const { app, ipcMain } = require('electron');
 
 /**
  * The ipcMain module is an Event Emitter. When used in the main process, it
@@ -6,5 +6,5 @@ const { ipcMain } = require('electron');
  * (web page). Messages sent from a renderer will be emitted to this module.
  */
 ipcMain.on('app_version', (event) => {
-  event.sender.send('app_version', { version: electron.app.getVersion() });
+  event.sender.send('app_version', { version: app.getVersion() });
 });
