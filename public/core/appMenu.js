@@ -14,8 +14,10 @@ const template = [
           label: app.name,
           submenu: [
             { role: 'about' },
+            { label: 'Check for updates...', click: sendOpenPreferencesEvent },
             { type: 'separator' },
             { label: 'Preferences', click: sendOpenPreferencesEvent },
+            { type: 'separator' },
             { role: 'services' },
             { type: 'separator' },
             { role: 'hide' },

@@ -11,6 +11,8 @@ import { NxPreferencesButton } from './NxPreferencesButton';
 
 import '../media/css/style.css';
 
+const { ipcRenderer } = require('electron');
+
 export const NxApp = () => {
   const [showPreferences, setShowPreferences] = useState(false);
 
@@ -20,6 +22,12 @@ export const NxApp = () => {
       setShowPreferences(!showPreferences);
     });
   }, [showPreferences]);
+
+  useEffect(() => {
+    ipcRenderer.on('open-preferences', (event, { OPEN }) => {
+      setShowPreferences(OPEN);
+    });
+  }, []);
 
   return (
     <div className="app">
