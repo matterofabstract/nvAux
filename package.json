@@ -69,6 +69,14 @@
     "appId": "com.abstractly.nvaux",
     "productName": "nvAux",
     "copyright": "Copyright © 02020 ${author}",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "matterofabstract",
+        "repo": "nvAux",
+        "private": false
+      }
+    ],
     "mac": {
       "category": "public.app-category.utilities"
     },
