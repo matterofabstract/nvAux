@@ -2,6 +2,7 @@ require('./core/');
 
 const path = require('path');
 const { app, BrowserWindow } = require('electron');
+const { autoUpdater } = require('electron-updater');
 
 const { isDev } = require('./utils');
 
@@ -36,6 +37,7 @@ app.on('ready', () => {
   mainWindow.loadURL(isDev() ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
   // mainWindow.on('closed', () => (mainWindow = null));
   mainWindow.setHasShadow(false);
+  autoUpdater.checkForUpdatesAndNotify();
 });
 
 app.on('window-all-closed', () => {
