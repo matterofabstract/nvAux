@@ -27,36 +27,36 @@ const template = [
           ]
         }
       ]
-    : [])
+    : []),
   // { role: 'fileMenu' }
   // {
   //   label: 'File',
   //   submenu: [isMac ? { role: 'close' } : { role: 'quit' }]
   // },
   // // { role: 'editMenu' }
-  // {
-  //   label: 'Edit',
-  //   submenu: [
-  //     { role: 'undo' },
-  //     { role: 'redo' },
-  //     { type: 'separator' },
-  //     { role: 'cut' },
-  //     { role: 'copy' },
-  //     { role: 'paste' },
-  //     ...(isMac
-  //       ? [
-  //           { role: 'pasteAndMatchStyle' },
-  //           { role: 'delete' },
-  //           { role: 'selectAll' },
-  //           { type: 'separator' },
-  //           {
-  //             label: 'Speech',
-  //             submenu: [{ role: 'startspeaking' }, { role: 'stopspeaking' }]
-  //           }
-  //         ]
-  //       : [{ role: 'delete' }, { type: 'separator' }, { role: 'selectAll' }])
-  //   ]
-  // },
+  {
+    label: 'Edit',
+    submenu: [
+      { role: 'undo' },
+      { role: 'redo' },
+      { type: 'separator' },
+      { role: 'cut' },
+      { role: 'copy' },
+      { role: 'paste' },
+      ...(isMac
+        ? [
+            // { role: 'pasteAndMatchStyle' },
+            { role: 'delete' },
+            { role: 'selectAll' },
+            { type: 'separator' }
+            // {
+            //   label: 'Speech',
+            //   submenu: [{ role: 'startspeaking' }, { role: 'stopspeaking' }]
+            // }
+          ]
+        : [{ role: 'delete' }, { type: 'separator' }, { role: 'selectAll' }])
+    ]
+  }
   // // { role: 'viewMenu' }
   // {
   //   label: 'View',
