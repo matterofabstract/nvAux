@@ -6,6 +6,10 @@ const sendOpenPreferencesEvent = () => {
   BrowserWindow.getFocusedWindow().webContents.send('open-preferences', { OPEN: true });
 };
 
+const checkForUpdate = () => {
+  console.log('Checking for update...');
+};
+
 const template = [
   // { role: 'appMenu' }
   ...(isMac
@@ -14,12 +18,12 @@ const template = [
           label: app.name,
           submenu: [
             { role: 'about' },
-            { label: 'Check for updates...', click: sendOpenPreferencesEvent },
+            { label: 'Check for Updates...', click: checkForUpdate },
             { type: 'separator' },
             { label: 'Preferences', click: sendOpenPreferencesEvent },
             { type: 'separator' },
-            { role: 'services' },
-            { type: 'separator' },
+            // { role: 'services' },
+            // { type: 'separator' },
             { role: 'hide' },
             { role: 'unhide' },
             { type: 'separator' },

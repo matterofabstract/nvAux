@@ -16,8 +16,8 @@ const { ipcRenderer } = require('electron');
 export const NxApp = () => {
   const [showPreferences, setShowPreferences] = useState(false);
 
+  // Global Keyboard Shortcut to open Preferences
   useEffect(() => {
-    // Setup a listener for Preferences keyboard shortcut
     mousetrap.bind('command+,', () => {
       setShowPreferences(!showPreferences);
     });

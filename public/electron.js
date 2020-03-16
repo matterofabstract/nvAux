@@ -1,16 +1,15 @@
+/**
+ * Electron Main Process File
+ */
+
 require('./core/');
 
 const path = require('path');
 const { app, BrowserWindow } = require('electron');
-const { autoUpdater } = require('electron-updater');
 
 const { isDev } = require('./utils');
 
 let mainWindow = null;
-
-/**
- * Electron Main Process File
- */
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -25,19 +24,12 @@ function createWindow() {
     minWidth: 100,
     minHeight: 100
   });
-
-  // mainWindow.webContents.on('did-finish-load', () => {
-  //   mainWindow.setTitle('nvAux');
-  //   console.log('mainWindow.getTitle() @@@@@@@@@@', mainWindow.getTitle());
-  // });
 }
 
 app.on('ready', () => {
   createWindow();
   mainWindow.loadURL(isDev() ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
-  // mainWindow.on('closed', () => (mainWindow = null));
   mainWindow.setHasShadow(false);
-  autoUpdater.checkForUpdatesAndNotify();
 });
 
 app.on('window-all-closed', () => {
