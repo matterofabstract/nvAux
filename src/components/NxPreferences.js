@@ -10,9 +10,9 @@ export const NxPreferences = () => {
       dialog
         .showOpenDialog({ properties: ['openDirectory'] })
         .then((result) => {
-          console.log(result.canceled);
-          store.set('workingDir', result.filePaths);
-          console.log(result.filePaths);
+          // console.log(result.canceled);
+          store.set('workingDir', result.filePaths[0]);
+          // console.log('result  ', result);
         })
         .catch((err) => {
           console.log(err);
