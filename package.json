@@ -31,9 +31,9 @@
     "@rescripts/cli": "^0.0.14",
     "@rescripts/rescript-env": "^0.0.12",
     "concurrently": "^5.1.0",
-    "electron": "^8.2.0",
+    "electron": "^8.2.1",
     "electron-builder": "^22.4.1",
-    "electron-devtools-installer": "^2.2.4",
+    "electron-devtools-installer": "^3.0.0",
     "electron-rebuild": "^1.10.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
@@ -43,10 +43,10 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
-    "prettier": "^2.0.2",
+    "prettier": "^2.0.4",
     "pretty-quick": "^2.0.1",
     "typescript": "^3.8.3",
-    "wait-on": "^4.0.1"
+    "wait-on": "^4.0.2"
   },
   "eslintConfig": {
     "extends": "react-app"
