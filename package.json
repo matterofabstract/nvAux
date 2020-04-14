@@ -1,5 +1,5 @@
 {
-  "name": "nvAux",
+  "name": "nvaux",
   "version": "0.1.3",
   "private": true,
   "main": "public/electron.js",
@@ -8,6 +8,7 @@
   "scripts": {
     "start": "BROWSER=none rescripts start",
     "build": "rescripts build",
+    "rebuild": "electron-rebuild -f -w sqlite3",
     "test": "rescripts test",
     "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "postinstall": "electron-builder install-app-deps",
