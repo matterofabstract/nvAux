@@ -6,7 +6,6 @@ require('./core/');
 
 const path = require('path');
 const Store = require('electron-store');
-const fdir = require('fdir');
 const { app, BrowserWindow } = require('electron');
 
 const { isDev } = require('./utils');
@@ -34,11 +33,6 @@ app.on('ready', () => {
   createWindow();
   mainWindow.loadURL(isDev() ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
   mainWindow.setHasShadow(false);
-  fdir.async(store.get('workingDir')).then((props) =>
-    // Send to Render process...
-    console.log('1231232121313312', props)
-  );
-  const files = fdir.async(store.get('workingDir'));
 });
 
 app.on('window-all-closed', () => {

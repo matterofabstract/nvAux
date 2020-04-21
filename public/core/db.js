@@ -1,9 +1,17 @@
+/* eslint-disable no-multi-str */
 const path = require('path');
 const Store = require('electron-store');
 const sqlite3 = require('sqlite3');
+const fdir = require('fdir');
 const { app } = require('electron');
 
 const store = new Store();
+
+// fdir.async(store.get('workingDir')).then((props) =>
+//   console.log('1231232121313312', props)
+// );
+const files = fdir.sync(store.get('workingDir'), { excludeBasePath: true });
+console.log('files @@@@@@@@@@', files);
 
 let dbPath;
 if (store.get('dbPath')) {
@@ -15,16 +23,29 @@ if (store.get('dbPath')) {
 const db = new sqlite3.Database(dbPath);
 
 db.serialize(function () {
-  db.run('CREATE TABLE lorem (info TEXT)');
+  // TODO check if table exists, otherwise create
+  db.run(
+    'CREATE TABLE `notes` (\
+      `filename` TEXT(120),\
+      `content` LONGTEXT,\
+      `file_type` TEXT(35),\
+      `date_added` DATETIME,\
+      `date_modified` DATETIME,\
+      `last_accessed` DATETIME\
+    )'
+  );
 
-  var stmt = db.prepare('INSERT INTO lorem VALUES (?)');
-  for (var i = 0; i < 10; i++) {
-    stmt.run('Ipsum ' + i);
-  }
+  var stmt = db.prepare('INSERT INTO notes (filename, content) VALUES (?,?)');
+  // for (var i = 0; i < 10; i++) {
+  //   stmt.run(`Ipsum ${i}`, `content ${i}`);
+  // }
+
+  files.forEach((f) => stmt.run(`${f}`, `content for ${f}`));
+
   stmt.finalize();
 
-  db.each('SELECT rowid AS id, info FROM lorem', function (err, row) {
-    console.log(row.id + ': ' + row.info);
+  db.each('SELECT rowid AS id, filename,content FROM notes', function (err, row) {
+    console.log(row.id + ': ' + row.filename);
   });
 });
 
