@@ -32,7 +32,7 @@
     "@rescripts/cli": "^0.0.14",
     "@rescripts/rescript-env": "^0.0.12",
     "concurrently": "^5.1.0",
-    "electron": "^8.2.1",
+    "electron": "^8.5.1",
     "electron-builder": "^22.4.1",
     "electron-devtools-installer": "^3.0.0",
     "electron-rebuild": "^1.10.1",
