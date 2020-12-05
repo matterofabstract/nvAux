@@ -1,55 +1,47 @@
 /**
- * Electron Main Process File
+ * You have arrived.
+ *
+ * nvAux's [electron] main process entrypoint file.
+ *
+ * 1. Load the nvAux core framework
+ * 2. Create and manage app window lifecylce
  */
 
 require('./core/');
 
-const path = require('path');
-const Store = require('electron-store');
 const { app, BrowserWindow } = require('electron');
 
-const { isDev } = require('./utils');
+const { getRenderProcessUrl } = require('./utils');
 
-const store = new Store();
-
-let mainWindow = null;
+let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
+    minWidth: 200,
+    minHeight: 280,
     width: 480,
     height: 680,
     title: 'nvAux',
     frame: false,
     transparent: true,
+    hasShadow: false,
     webPreferences: {
       nodeIntegration: true,
-    },
-    minWidth: 200,
-    minHeight: 280,
+    }
   });
+  mainWindow.loadURL(getRenderProcessUrl());
 }
 
 app.on('ready', () => {
   createWindow();
-  mainWindow.loadURL(isDev() ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
-  mainWindow.setHasShadow(false);
 });
 
 app.on('window-all-closed', () => {
-  // On macOS it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q.
-  // Exceptions include System Preferences, App Store,
-  // Though there is no way to re-open the main window
-  // through the menu, but you can click on the dock icon.
   if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
 app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow();
-  } else {
     mainWindow.show();
-  }
 });

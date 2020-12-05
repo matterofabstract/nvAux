@@ -1,3 +1,4 @@
+const path = require('path');
 const { app, remote } = require('electron');
 
 const isDev = () => {
@@ -17,5 +18,12 @@ const getSystemInfo = () => ({
   version: process.getSystemVersion()
 });
 
+const getRenderProcessUrl = () => (
+  isDev()
+    ? 'http://localhost:3000'
+    : `file://${path.join(__dirname, '../build/index.html')}`
+)
+
 exports.isDev = isDev;
 exports.getSystemInfo = getSystemInfo;
+exports.getRenderProcessUrl = getRenderProcessUrl;
