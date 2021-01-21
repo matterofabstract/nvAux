@@ -1,9 +1,25 @@
 // out: ./style.css, sourcemap: false, compress: true
 
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  user-select: none;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background: #1e2124;
+    border: none;
     color: #8b8c8d;
+    border: none;
   }
   .app button.close-window,
   .app button.show-preferences {
@@ -31,12 +47,10 @@
     }
   }
 
-  .mediabar .mediabar-controls .fa-play {
-    color: #b2b2b2;
-  }
   .omnibar input {
-    background: #232629;
-    border: 1px solid #2d3033;
+    background: rgba(216, 216, 216, 0.03);
+    border: 1px solid rgba(151, 151, 151, 0.1);
+    border-radius: 4px;
     color: white;
     &:focus {
       outline: 1px solid #3aabf8;
@@ -104,14 +118,6 @@
   }
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  position: relative;
-  overflow: hidden;
-  user-select: none;
-}
-
 // This gives us a canvas to postion things absolutely.
 .app {
   position: relative;
@@ -119,26 +125,17 @@ body {
   height: 100vh;
   button.close-window,
   button.show-preferences {
-    height: 20px;
-    width: 20px;
     background: none;
     border: none;
-    position: absolute;
-    top: 5px;
     font-size: 11px;
     z-index: 999;
+    height: 100%;
     &:hover,
     &:focus,
     &:active {
       outline: none;
       background: none;
     }
-  }
-  button.close-window {
-    right: 5px;
-  }
-  button.show-preferences {
-    right: 20px;
   }
 }
 
@@ -174,21 +171,61 @@ body {
   }
 }
 
+.flex {
+  display: flex;
+}
+.flex-end {
+  align-content: flex-end;
+}
+.mb-1 {
+  margin-bottom: 3px;
+}
+.mb-3 {
+  margin-bottom: 6px;
+}
+
 .mediabar {
   -webkit-app-region: drag;
+  display: flex;
+  height: 30px;
   width: 100%;
-  padding: 5px 10px 3px 10px;
+  padding-top: 6px;
+  box-sizing: border-box;
   .mediabar-controls {
-    opacity: 0.5;
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+    button {
+      background: none;
+      border: none;
+      color: inherit;
+      padding: auto;
+      &:active {
+        color: white;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
     svg {
-      font-size: 12px;
+      font-size: 11px;
     }
-    .fa-backward {
-      padding-right: 8px;
-    }
-    .fa-forward {
-      padding-left: 8px;
-    }
+  }
+  .display {
+    display: flex;
+    width: ~'calc(100% - 70px)';
+    height: 100%;
+    box-sizing: border-box;
+    margin-left: 3px;
+    padding-left: 6px;
+    align-self: center;
+    // background: #131517;
+    background-color: #2e3330;
+    box-shadow: inset 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    font-size: 11px;
+    color: hsla(95, 15%, 63%, 0.247);
+    font-family: 'Operator Mono';
   }
 }
 
@@ -331,12 +368,12 @@ body {
 
 .nothing-selected {
   display: block;
-  padding-top: 20%;
-  color: #272a31;
+  color: #424447;
   width: 100%;
   text-align: center;
   font-family: Helvetica;
-  font-size: 22px;
+  font-size: 18px;
+  padding: 20px 0;
 }
 
 pre {

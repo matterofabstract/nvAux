@@ -1,55 +1,70 @@
 /**
- * Electron Main Process File
+ * You have arrived.
+ *
+ * nvAux's [electron] main process entrypoint file.
+ *
+ * 1. Load the nvAux core framework
+ * 2. Create and manage app window lifecylce
  */
 
 require('./core/');
 
-const path = require('path');
-const Store = require('electron-store');
 const { app, BrowserWindow } = require('electron');
 
-const { isDev } = require('./utils');
+const { getRenderProcessUrl } = require('./utils');
 
-const store = new Store();
+let mainWindow;
 
-let mainWindow = null;
-
-function createWindow() {
+const createWindow = () => {
   mainWindow = new BrowserWindow({
-    width: 480,
-    height: 680,
+    minWidth: 200,
+    minHeight: 100,
+    width: 420,
+    height: 138,
     title: 'nvAux',
     frame: false,
     transparent: true,
+    hasShadow: false,
     webPreferences: {
       nodeIntegration: true,
-    },
-    minWidth: 200,
-    minHeight: 280,
+    }
   });
+  mainWindow.loadURL(getRenderProcessUrl());
 }
 
-app.on('ready', () => {
+app.allowRendererProcessReuse = true;
+
+/**
+ * Emitted once, when Electron has finished initializing. On macOS, launchInfo
+ * holds the userInfo of the NSUserNotification that was used to open the
+ * application, if it was launched from Notification Center. You can also call
+ * app.isReady() to check if this event has already fired and app.whenReady()
+ * to get a Promise that is fulfilled when Electron is initialized.
+ */
+app.on('ready', async () => {
   createWindow();
-  mainWindow.loadURL(isDev() ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
-  mainWindow.setHasShadow(false);
 });
 
+/**
+ * Emitted when all windows have been closed. If you do not subscribe to this
+ * event and all windows are closed, the default behavior is to quit the app;
+ * however, if you subscribe, you control whether the app quits or not. If the
+ * user pressed Cmd + Q, or the developer called app.quit(), Electron will first
+ * try to close all the windows and then emit the will-quit event, and in this
+ * case the window-all-closed event would not be emitted.
+ */
 app.on('window-all-closed', () => {
-  // On macOS it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q.
-  // Exceptions include System Preferences, App Store,
-  // Though there is no way to re-open the main window
-  // through the menu, but you can click on the dock icon.
   if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
+/**
+ * Emitted when the application is activated. Various actions can trigger this
+ * event, such as launching the application for the first time, attempting to
+ * re-launch the application when it's already running, or clicking on the
+ * application's dock or taskbar icon.
+ */
 app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow();
-  } else {
-    mainWindow.show();
-  }
+  mainWindow.show();
 });

@@ -11,7 +11,9 @@ const store = new Store();
 //   console.log('1231232121313312', props)
 // );
 const files = fdir.sync(store.get('workingDir'), { excludeBasePath: true });
-console.log('files @@@@@@@@@@', files);
+// console.log('files @@@@@@@@@@', files);
+
+console.log('app.getPath @@@@@@@@@@', app.getPath('appData'));
 
 let dbPath;
 if (store.get('dbPath')) {
@@ -44,9 +46,9 @@ db.serialize(function () {
 
   stmt.finalize();
 
-  db.each('SELECT rowid AS id, filename,content FROM notes', function (err, row) {
-    console.log(row.id + ': ' + row.filename);
-  });
+  // db.each('SELECT rowid AS id, filename,content FROM notes', function (err, row) {
+  //   console.log(row.id + ': ' + row.filename);
+  // });
 });
 
 db.close();

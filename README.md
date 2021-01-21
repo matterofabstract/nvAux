@@ -1,22 +1,21 @@
 # nvAux
 
+The in-the-zone, idea-capturing sidekick for creative knowledge workers.
+
 [![Dependencies](https://david-dm.org/matterofabstract/nvAux.svg)](https://github.com/matterofabstract/nvAux)
 ![Github All Releases](https://img.shields.io/github/downloads/matterofabstract/nvAux/total.svg)
 ![Lint](https://github.com/matterofabstract/nvAux/workflows/Lint/badge.svg)
 ![Build/release](https://github.com/matterofabstract/nvAux/workflows/Build/release/badge.svg)
 
-A personal tool for your professional lifestyle.
-
-nvAux helps you capture and retrieve things at the speed of thought. At it's core it's a note-taking tool, but through addons you can do a lot of interesting stuff.
-
-![Screenshot of nvAux](https://bpk-disk.s3.us-east-1.amazonaws.com/nvAux-screenshot.png?c=3)
+nvAux is a note-taking app that knows how to get weird. It's purpose is to capture and retrieve things at the speed of thought so that you can maximize on your journey through flowstate.
+![Screenshot of nvAux](https://bpk-disk.s3.us-east-1.amazonaws.com/nvAux-screenshot.png?c=5)
 
 ## Development
 
 Get a local develop instance running with:
 
 ```sh
-yarn && yarn electron-dev
+yarn && yarn dev
 ```
 
 You can generate a build for macOS, Windows and Linux all in one go with:
@@ -29,7 +28,7 @@ Don't forget to take a peak at `packages.json` for more commands.
 
 ## Releasing updates
 
-Updates to nvAux are done through GitHub Actions, namely Samuelmeuli's [action-electron-builder](https://github.com/samuelmeuli/action-electron-builder). See the [workflows](https://github.com/matterofabstract/nvAux/tree/master/.github/workflows) directory for details.
+Releases are managed through GitHub Actions, namely Samuelmeuli's [action-electron-builder](https://github.com/samuelmeuli/action-electron-builder). See the [workflows](https://github.com/matterofabstract/nvAux/tree/master/.github/workflows) directory for details.
 
 When you want to create a new release, follow these steps:
 

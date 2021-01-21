@@ -1,3 +1,4 @@
+const path = require('path');
 const { app, remote } = require('electron');
 
 const isDev = () => {
@@ -17,5 +18,17 @@ const getSystemInfo = () => ({
   version: process.getSystemVersion()
 });
 
+/**
+ * The url is a remote address (e.g. http://) if we're in development,
+ * otherwise it's a path to the local HTML file using the file:// protocol.
+ * More: https://www.electronjs.org/docs/api/browser-window#winloadurlurl-options
+ */
+const getRenderProcessUrl = () => (
+  isDev()
+    ? 'http://localhost:3000'
+    : `file://${path.join(__dirname, '../build/index.html')}`
+)
+
 exports.isDev = isDev;
 exports.getSystemInfo = getSystemInfo;
+exports.getRenderProcessUrl = getRenderProcessUrl;
