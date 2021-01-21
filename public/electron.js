@@ -18,9 +18,9 @@ let mainWindow;
 const createWindow = () => {
   mainWindow = new BrowserWindow({
     minWidth: 200,
-    minHeight: 280,
-    width: 480,
-    height: 680,
+    minHeight: 100,
+    width: 420,
+    height: 138,
     title: 'nvAux',
     frame: false,
     transparent: true,
@@ -32,6 +32,8 @@ const createWindow = () => {
   mainWindow.loadURL(getRenderProcessUrl());
 }
 
+app.allowRendererProcessReuse = true;
+
 /**
  * Emitted once, when Electron has finished initializing. On macOS, launchInfo
  * holds the userInfo of the NSUserNotification that was used to open the
@@ -39,7 +41,7 @@ const createWindow = () => {
  * app.isReady() to check if this event has already fired and app.whenReady()
  * to get a Promise that is fulfilled when Electron is initialized.
  */
-app.on('ready', () => {
+app.on('ready', async () => {
   createWindow();
 });
 
