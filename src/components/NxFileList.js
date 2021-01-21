@@ -20,7 +20,7 @@ function getTypeColor(type) {
 
 export const NxFileList = () => {
   const [activeFileId, setActiveFileId] = useState();
-  const [fileList, setFileList] = useState();
+  const [fileList] = useState();
   const size = useWindowSize();
 
   const queryConstructor = collection =>

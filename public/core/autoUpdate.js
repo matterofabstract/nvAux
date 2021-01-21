@@ -3,7 +3,7 @@
  * 'Check for Update' in the appMenu.js
  */
 
-const { app, BrowserWindow } = require('electron');
+const { app } = require('electron');
 const { autoUpdater } = require('electron-updater');
 
 (async () => {

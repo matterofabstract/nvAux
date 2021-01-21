@@ -6,7 +6,7 @@ import { NxMediabar } from './NxMediabar';
 import { NxAppTray } from './NxAppTray';
 import { NxOmnibar } from './NxOmnibar';
 import { NxFileList } from './NxFileList';
-import { NxFileContent } from './NxFileContent';
+// import { NxFileContent } from './NxFileContent';
 import { NxPreferences } from './NxPreferences';
 
 import { initializeDB } from './initializeDB';
