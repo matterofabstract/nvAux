@@ -4,7 +4,12 @@
   "private": true,
   "main": "public/electron.js",
   "homepage": "./",
-  "description": "A personal tool for your professional lifestyle",
+  "description": "A note-taking app that knows how to get weird",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matterofabstract/nvAux"
+  },
   "scripts": {
     "start": "BROWSER=none rescripts start",
     "build": "rescripts build",
@@ -80,7 +85,7 @@
   "build": {
     "appId": "com.abstractly.nvaux",
     "productName": "nvAux",
-    "copyright": "Copyright © 02020 ${author}",
+    "copyright": "Copyright © 02021 ${author}",
     "publish": [
       {
         "provider": "github",
