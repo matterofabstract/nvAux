@@ -15,7 +15,7 @@ This is the codebase for the app and what follows is to be taken in a developers
 
 ## Before jumping in...
 
-Thank you for taking interest in the development of this project. It means you're curious, creative and courageous enough to want to hack on something we hold very dear. This is the very reason why the source code is made available and look forward to getting to know you.
+Thank you for taking interest in the development of this project. It means you're curious, creative and courageous enough to hack on something we hold very dear. This is the very reason why the source code is made available and look forward to getting to know you.
 
 Please be aware that while your contributions will be celebrated and credited appropriately, nvAux remains property of Abstractly, LLC.
 
@@ -23,6 +23,6 @@ Please be aware that while your contributions will be celebrated and credited ap
 
 ```sh
 yarn && yarn dev
-``` 
+```
 
-![](https://bpk-disk.s3.us-east-1.amazonaws.com/designed-by-abstractly-footer.png?c=1)
+![](https://bpk-disk.s3.us-east-1.amazonaws.com/designed-by-abstractly-footer.png?c=2)
