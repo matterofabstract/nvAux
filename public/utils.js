@@ -1,8 +1,8 @@
 const path = require('path');
-const { app, remote } = require('electron');
+const { app } = require('electron');
 
 const isDev = () => {
-  const nvaux = app || remote.app;
+  const nvaux = app
   const isEnvSet = 'ELECTRON_IS_DEV' in process.env;
   const getFromEnv = parseInt(process.env.ELECTRON_IS_DEV, 10) === 1;
   return isEnvSet ? getFromEnv : !nvaux.isPackaged;

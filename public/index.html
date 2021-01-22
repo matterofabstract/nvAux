@@ -10,7 +10,10 @@
       |_| |_|\_/ \_| |_/\__,_/_/\_\
     -->
     <title>nvAux</title>
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; media-src 'self'; child-src 'self'; object-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.github.com; font-src 'self' data:"
+    />
   </head>
   <body>
     <div id="root"></div>

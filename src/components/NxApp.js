@@ -13,8 +13,6 @@ import { initializeDB } from './initializeDB';
 
 import '../media/css/style.css';
 
-const { ipcRenderer } = require('electron');
-
 export const NxApp = () => {
   const [db, setDb] = useState();
   const [showPreferences, setShowPreferences] = useState(false);
@@ -27,7 +25,7 @@ export const NxApp = () => {
   }, [showPreferences]);
 
   useEffect(() => {
-    ipcRenderer.on('open-preferences', (event, { OPEN }) => {
+    window.ipcRenderer.on('open-preferences', (event, { OPEN }) => {
       setShowPreferences(OPEN);
     });
   }, []);

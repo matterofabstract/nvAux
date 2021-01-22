@@ -6,10 +6,8 @@ import React, { useState } from 'react';
 import { IconContext } from 'react-icons';
 import { FaSearch } from 'react-icons/fa';
 
-const { ipcRenderer } = require('electron');
-
 const searchNotesContaining = (searchString) => {
-  ipcRenderer.send('search-notes-containing', searchString);
+  // ipcRenderer.send('search-notes-containing', searchString);
 };
 
 export const NxOmnibar = () => {

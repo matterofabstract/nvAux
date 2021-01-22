@@ -8,6 +8,7 @@
  */
 
 require('./core/');
+const path = require('path');
 
 const { app, BrowserWindow } = require('electron');
 
@@ -15,11 +16,12 @@ const { getRenderProcessUrl } = require('./utils');
 
 let mainWindow;
 
+
 const createWindow = () => {
   mainWindow = new BrowserWindow({
     minWidth: 200,
     minHeight: 100,
-    width: 420,
+    width: 580,
     height: 138,
     title: 'nvAux',
     frame: false,
@@ -27,12 +29,12 @@ const createWindow = () => {
     hasShadow: false,
     webPreferences: {
       nodeIntegration: true,
+      // contextIsolation: true
+      preload: path.join(app.getAppPath(), 'public/preload.js')
     }
   });
   mainWindow.loadURL(getRenderProcessUrl());
 }
-
-app.allowRendererProcessReuse = true;
 
 /**
  * Emitted once, when Electron has finished initializing. On macOS, launchInfo
