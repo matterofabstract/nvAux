@@ -30,9 +30,9 @@ export const NxMediabar = () => {
           <div style={{ position: 'relative', top: -3,  backgroundImage: `url(${imgKnob})`, backgroundSize: 'contain', width: 33, height: 28, }} />
         </div>
       <div className="display">
-        <div>
+        {/* <div>
           Nothing Playing
-        </div>
+        </div> */}
       </div>
     </div>
   );
