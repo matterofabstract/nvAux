@@ -26,9 +26,14 @@ const getSystemInfo = () => ({
 const getRenderProcessUrl = () => (
   isDev()
     ? 'http://localhost:3000'
-    : `file://${path.join(__dirname, '../build/index.html')}`
+    : `file://${path.join(__dirname, '../../build/index.html')}`
 )
+
+const getPreloadPath = () => (
+  path.join(app.getAppPath(), 'public/core/preload.js')
+);
 
 exports.isDev = isDev;
 exports.getSystemInfo = getSystemInfo;
 exports.getRenderProcessUrl = getRenderProcessUrl;
+exports.getPreloadPath = getPreloadPath;

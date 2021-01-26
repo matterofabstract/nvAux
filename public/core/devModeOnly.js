@@ -1,9 +1,10 @@
-const { app } = require('electron');
-const { isDev } = require('../utils');
-
 /**
  * Things to run when only in development-mode.
  */
+
+const { app } = require('electron');
+
+const { isDev } = require('./utils');
 
 (async () => {
   if (isDev) {

@@ -1,43 +1,39 @@
 /**
- * nvAux Omnibar - Search
+ * NxOmnibar - The nvAux Omnibar
+ * A single input to simultaneously search or create a note.
+ * More: https://github.com/matterofabstract/nvAux/wiki/NxOmnibar
+ *
+ * 1. Type something, nvAux will keep it in state as omniText
+ * 2. ...
+ * 3. ...
  */
 
-import React, { useState } from 'react';
-import { IconContext } from 'react-icons';
-import { FaSearch } from 'react-icons/fa';
+import React from 'react';
+import { useObserver } from 'mobx-react';
 
-const searchNotesContaining = (searchString) => {
-  // ipcRenderer.send('search-notes-containing', searchString);
-};
+import { NxIcon } from './NxIcon';
+import { StoreContext } from '../store';
 
 export const NxOmnibar = () => {
-  const [omniText, setOmniText] = useState('');
-
-  // useEffect(() => {
-  //   ipcRenderer.on('search-notes-containing-reply', (event, arg) => {
-  //     console.log('message @@@@@@@@@@', arg);
-  //   })
-  // }, [])
+  const store = React.useContext(StoreContext);
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      searchNotesContaining(omniText)
+      console.log('focus on best match or create new...');
     }
   }
 
-  return (
+  return useObserver(() => (
     <div className="omnibar">
-      <IconContext.Provider value={{ className: 'icon-search' }}>
-        <FaSearch />
-      </IconContext.Provider>
-
+      <NxIcon name="search" />
       <input
         type="text"
         placeholder="Search or Create"
-        value={omniText}
-        onChange={(e) => setOmniText(e.target.value)}
+        onChange={store.setOmniText}
+        value={store.omniText}
+        onChange={(e) => store.setOmniText(e.target.value)}
         onKeyDown={handleKeyDown}
       />
     </div>
-  );
+  ));
 };
