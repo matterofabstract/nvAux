@@ -29,7 +29,6 @@ export const NxOmnibar = () => {
       <input
         type="text"
         placeholder="Search or Create"
-        onChange={store.setOmniText}
         value={store.omniText}
         onChange={(e) => store.setOmniText(e.target.value)}
         onKeyDown={handleKeyDown}
