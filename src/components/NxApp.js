@@ -4,14 +4,22 @@ import { Provider } from 'rxdb-hooks';
 import { NxMediabar } from './NxMediabar';
 import { NxAppTray } from './NxAppTray';
 import { NxBody } from './NxBody';
+import { useWindowSize } from '../hooks';
 
 import { StoreProvider } from '../store';
+import { useDebounce } from '../hooks';
 import { initializeDB } from './initializeDB';
 
 import '../media/css/style.css';
 
 export const NxApp = () => {
   const [db, setDb] = useState();
+  const size = useWindowSize();
+  const windowDimensions = useDebounce(size, 500)
+
+  useEffect(() => {
+    window.ipcRenderer.send('save_window_dimensions', windowDimensions);
+  }, [windowDimensions])
 
   /**
    * Database
