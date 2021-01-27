@@ -19,10 +19,13 @@
  */
 
 require('./core');
+const Store = require('electron-store');
 
 const { app, BrowserWindow } = require('electron');
 
 const { getRenderProcessUrl, getPreloadPath } = require('./core/utils');
+
+const store = new Store();
 
 let mainWindow;
 
@@ -30,8 +33,8 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     minWidth: 300,
     minHeight: 36,
-    width: 580,
-    height: 138,
+    width: store.get('window_dimensions.width') || 580,
+    height: store.get('window_dimensions.height') || 138,
     title: 'nvAux',
     frame: false,
     transparent: true,
