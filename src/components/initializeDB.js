@@ -29,22 +29,11 @@ export const initializeDB = async () => {
     adapter: 'idb',
   });
 
-  // add a collection to our db
-  const collections = await db.addCollections({
+  await db.addCollections({
     notes: {
       schema: noteSchema
     }
   });
-
-  collections.notes.insert({
-    name: 'foooobar',
-    type: 'soundcloud',
-    body: 'readme'
-  });
-
-
-  // maybe sync collection to a remote
-  // ...
 
   return db;
 };

@@ -11,6 +11,10 @@ ipcMain.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });
 });
 
+ipcMain.on('hide_app', (event) => {
+  app.hide();
+});
+
 ipcMain.on('search-notes-containing', (event, arg) => {
   console.log('ipcMain heard "search-notes-containing" with: ', arg);
   console.log('~~~~~~~~~~~~ ', global)

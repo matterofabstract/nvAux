@@ -1,37 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Provider } from 'rxdb-hooks';
-import * as mousetrap from 'mousetrap';
 
 import { NxMediabar } from './NxMediabar';
 import { NxAppTray } from './NxAppTray';
-import { NxOmnibar } from './NxOmnibar';
-import { NxFileList } from './NxFileList';
-// import { NxFileContent } from './NxFileContent';
-import { NxPreferences } from './NxPreferences';
+import { NxBody } from './NxBody';
 
+import { StoreProvider } from '../store';
 import { initializeDB } from './initializeDB';
 
 import '../media/css/style.css';
 
-const { ipcRenderer } = require('electron');
-
 export const NxApp = () => {
   const [db, setDb] = useState();
-  const [showPreferences, setShowPreferences] = useState(false);
 
-  // Global Keyboard Shortcut to open Preferences
-  useEffect(() => {
-    mousetrap.bind('command+,', () => {
-      setShowPreferences(!showPreferences);
-    });
-  }, [showPreferences]);
-
-  useEffect(() => {
-    ipcRenderer.on('open-preferences', (event, { OPEN }) => {
-      setShowPreferences(OPEN);
-    });
-  }, []);
-
+  /**
+   * Database
+   */
   useEffect(() => {
     // Notice that RxDB instantiation is asynchronous; until db becomes available
     // consumer hooks that depend on it will still work, absorbing the delay by
@@ -44,23 +28,16 @@ export const NxApp = () => {
   }, []);
 
   return (
-    <Provider db={db}>
-      <div className="app">
-        <div className="flex mb-3">
-          <div style={{ flexGrow: 1 }} />
-          <NxMediabar />
-          <NxAppTray />
+    <StoreProvider>
+      <Provider db={db}>
+        <div className="app">
+          <div className="flex mb-3">
+            <NxMediabar />
+            <NxAppTray />
+          </div>
+          <NxBody />
         </div>
-        {showPreferences ? (
-          <NxPreferences />
-        ) : (
-          <>
-            <NxOmnibar />
-            <NxFileList />
-            {/* <NxFileContent /> */}
-          </>
-        )}
-      </div>
-    </Provider>
+      </Provider>
+    </StoreProvider>
   );
 };

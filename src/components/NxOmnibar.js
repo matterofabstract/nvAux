@@ -1,45 +1,55 @@
 /**
- * nvAux Omnibar - Search
+ * NxOmnibar - The nvAux Omnibar
+ * A single input to simultaneously search or create a note.
+ * More: https://github.com/matterofabstract/nvAux/wiki/NxOmnibar
+ *
  */
 
-import React, { useState } from 'react';
-import { IconContext } from 'react-icons';
-import { FaSearch } from 'react-icons/fa';
+import React, { useEffect, useRef } from 'react';
+import { Observer } from 'mobx-react';
 
-const { ipcRenderer } = require('electron');
-
-const searchNotesContaining = (searchString) => {
-  ipcRenderer.send('search-notes-containing', searchString);
-};
+import { NxIcon } from './NxIcon';
+import { StoreContext } from '../store';
 
 export const NxOmnibar = () => {
-  const [omniText, setOmniText] = useState('');
-
-  // useEffect(() => {
-  //   ipcRenderer.on('search-notes-containing-reply', (event, arg) => {
-  //     console.log('message @@@@@@@@@@', arg);
-  //   })
-  // }, [])
+  const store = React.useContext(StoreContext);
+  const inputEl = useRef(null);
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      searchNotesContaining(omniText)
+      console.log('focus on best match or create new...');
     }
   }
 
-  return (
-    <div className="omnibar">
-      <IconContext.Provider value={{ className: 'icon-search' }}>
-        <FaSearch />
-      </IconContext.Provider>
+  useEffect(() => {
+    /**
+     * TODO: autocompletion fill-in text selection
+     *
+     * You need to first select the field entirely
+     *   inputEl.current.select();
+     *
+     * Then make your selection with a range (and direction):
+     *   inputEl.current.setSelectionRange(3, 6, "backward");
+     *
+     * to get the current position of key cursor:
+     *   inputEl.current.selectionStart
+     *
+     */
+  }, []);
 
-      <input
-        type="text"
-        placeholder="Search or Create"
-        value={omniText}
-        onChange={(e) => setOmniText(e.target.value)}
-        onKeyDown={handleKeyDown}
-      />
-    </div>
+  return (
+    <Observer>{() => (
+      <div className="omnibar">
+        <NxIcon name="search" />
+        <input
+          type="text"
+          placeholder="Search or Create"
+          value={store.omniText}
+          ref={inputEl}
+          onChange={(e) => store.setOmniText(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+      </div>
+    )}</Observer>
   );
 };
