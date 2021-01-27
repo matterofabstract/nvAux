@@ -12,30 +12,27 @@ import { StoreContext } from '../store';
 
 export const NxBody = (props) => {
   const store = React.useContext(StoreContext);
-  const [showPreferences, setShowPreferences] = useState(false);
 
 
   /**
    * App Preferences
    */
   useEffect(() => {
-    mousetrap.bind('command+,', () => setShowPreferences(!showPreferences));
-  }, [showPreferences]);
+    mousetrap.bind('command+,', () => store.setShowPreferences(!store.showPreferences));
+  }, [store.showPreferences]);
 
   useEffect(() => {
-    window.ipcRenderer.on('open-preferences', (event, { OPEN }) => setShowPreferences(OPEN) );
+    window.ipcRenderer.on('open-preferences', (event, { OPEN }) => store.setShowPreferences(OPEN) );
   }, []);
 
   return (
-    <Observer>{() => (
-      store.showPreferences ? (
-        <NxPreferences />
-      ) : (
-        <>
-          <NxNotesBody />
-        </>
-      )
-    )}</Observer>
+    <Observer>
+      {() => (
+        store.showPreferences
+          ? <NxPreferences />
+          : <NxNotesBody />
+      )}
+    </Observer>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRxData } from 'rxdb-hooks';
 
 import { IconContext } from 'react-icons';
@@ -20,26 +20,23 @@ function getTypeColor(type) {
 
 export const NxFileList = () => {
   const [activeFileId, setActiveFileId] = useState();
-  const [fileList] = useState();
+  const [fileList, setFileList] = useState();
   const size = useWindowSize();
 
   const queryConstructor = collection =>
     collection
       .find()
-      .where('type')
-      .equals('soundcloud');
+      // .where('type')
+      // .equals('soundcloud');
 
   const { result: notes, isFetching } = useRxData(
     'notes',
     queryConstructor
   );
 
-  // useEffect(() => {
-  //   ipcRenderer.on('search-notes-containing-reply', (event, arg) => {
-  //     console.log('NxFileList heard "search-notes-containing-reply"', event)
-  //     setFileList(arg);
-  //   })
-  // }, [])
+  useEffect(() => {
+    setFileList(notes)
+  }, [notes])
 
   if (isFetching) {
     return 'loading notes...';
@@ -50,15 +47,9 @@ export const NxFileList = () => {
     <ResizableBox width={size.width} height={fileList ? 200 : 100} axis={'y'}>
       <div className="file-list">
 
-        <ul>
-          {notes.map((note, idx) => (
-            <li key={idx}>{note.name}</li>
-          ))}
-        </ul>
-
         { fileList ? (<ul>
-          {fileList.map(({ id, name, preview, type }) => (
-            <li key={id} onClick={() => setActiveFileId(id)} className={`${id === activeFileId && 'active'}`}>
+          {fileList.map(({ guid, name, preview, type }) => (
+            <li key={guid} onClick={() => setActiveFileId(guid)} className={`${guid === activeFileId && 'active'}`}>
               <div style={{ width: 25, display: 'inline-block' }}>
                 <IconContext.Provider
                   value={{
