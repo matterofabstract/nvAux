@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Provider } from 'rxdb-hooks';
-import * as mousetrap from 'mousetrap';
 
 import { NxMediabar } from './NxMediabar';
 import { NxAppTray } from './NxAppTray';
-import { NxOmnibar } from './NxOmnibar';
-import { NxFileList } from './NxFileList';
-import { NxFileContent } from './NxFileContent';
-import { NxPreferences } from './NxPreferences';
+import { NxBody } from './NxBody';
 
 import { StoreProvider } from '../store';
 import { initializeDB } from './initializeDB';
@@ -16,7 +12,6 @@ import '../media/css/style.css';
 
 export const NxApp = () => {
   const [db, setDb] = useState();
-  const [showPreferences, setShowPreferences] = useState(false);
 
   /**
    * Database
@@ -32,36 +27,15 @@ export const NxApp = () => {
     initDB();
   }, []);
 
-
-  /**
-   * App Preferences
-   */
-  useEffect(() => {
-    mousetrap.bind('command+,', () => setShowPreferences(!showPreferences));
-  }, [showPreferences]);
-
-  useEffect(() => {
-    window.ipcRenderer.on('open-preferences', (event, { OPEN }) => setShowPreferences(OPEN) );
-  }, []);
-
-
   return (
     <StoreProvider>
       <Provider db={db}>
         <div className="app">
           <div className="flex mb-3">
             <NxMediabar />
-            <NxAppTray setShowPreferences={setShowPreferences} />
+            <NxAppTray />
           </div>
-          {showPreferences ? (
-            <NxPreferences />
-          ) : (
-            <>
-              <NxOmnibar />
-              <NxFileList />
-              <NxFileContent />
-            </>
-          )}
+          <NxBody />
         </div>
       </Provider>
     </StoreProvider>
