@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Observer } from 'mobx-react';
-import * as mousetrap from 'mousetrap';
 
 import { NxOmnibar } from './NxOmnibar';
 import { NxFileList } from './NxFileList';
@@ -8,22 +7,12 @@ import { NxFileContent } from './NxFileContent';
 import { NxPreferences } from './NxPreferences';
 
 import { StoreContext } from '../store';
+import { usePreferencePanelListener } from '../hooks';
 
-
-export const NxBody = (props) => {
+export const NxBody = () => {
   const store = React.useContext(StoreContext);
 
-
-  /**
-   * App Preferences
-   */
-  useEffect(() => {
-    mousetrap.bind('command+,', () => store.setShowPreferences(!store.showPreferences));
-  }, [store.showPreferences]);
-
-  useEffect(() => {
-    window.ipcRenderer.on('open-preferences', (event, { OPEN }) => store.setShowPreferences(OPEN) );
-  }, []);
+  usePreferencePanelListener();
 
   return (
     <Observer>
