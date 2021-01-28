@@ -5,7 +5,7 @@
  *
  */
 
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Observer } from 'mobx-react';
 import { useRxData, useRxCollection} from 'rxdb-hooks';
 import { v4 as uuidv4 } from 'uuid';

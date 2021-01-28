@@ -9,8 +9,8 @@ export const StoreProvider = ({ children }) => {
     showPreferences: false,
     omniText: '',
 
-    setShowPreferences: (open=undefined) => {
-      store.showPreferences = open || !store.showPreferences;
+    setShowPreferences: () => {
+      store.showPreferences = !store.showPreferences;
     },
     setOmniText: (searchString) => {
       store.omniText = searchString;
