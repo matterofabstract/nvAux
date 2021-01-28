@@ -39,7 +39,7 @@ export const NxApp = () => {
     <StoreProvider>
       <Provider db={db}>
         <div className="app">
-          <div className="flex mb-3">
+          <div className="flex mb-1" style={{ height: 33 }}>
             <NxMediabar />
             <NxAppTray />
           </div>
