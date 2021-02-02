@@ -1,10 +1,18 @@
 import React from 'react';
 import { FaCog } from 'react-icons/fa';
+import { Observer } from 'mobx-react';
 
-export const NxPreferencesButton = ({ togglePreferences, showPreferences }) => {
+import { StoreContext } from '../store';
+
+export const NxPreferencesButton = () => {
+  const store = React.useContext(StoreContext);
   return (
-    <button className="show-preferences" onClick={() => togglePreferences(!showPreferences)}>
-      <FaCog />
-    </button>
+    <Observer>
+      {() => (
+        <button className="show-preferences" onClick={store.setShowPreferences}>
+          <FaCog />
+        </button>
+      )}
+    </Observer>
   );
 };

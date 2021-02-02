@@ -1,38 +1,52 @@
-/**
+/**             ___
+ *             / _ \
+ *  _ ____   _/ /_\ \_   ___  __
+ * | '_ \ \ / /  _  | | | \ \/ /
+ * | | | \ V /| | | | |_| |>  <
+ * |_| |_|\_/ \_| |_/\__,_/_/\_\
+ * =============================
+ * © 2021 Abstractly, LLC. All rights reserved.
+ *
  * You have arrived.
  *
- * nvAux's [electron] main process entrypoint file.
+ * nvAux's [electron] main process entrypoint file. The Electron side of things
+ * is fairly minimal. Besides getting access to system-level features and
+ * control through Electron, nvAux lives in the frontend.
  *
- * 1. Load the nvAux core framework
- * 2. Create and manage app window lifecylce
+ * 1. Setup and create the Electron window that nvAux will run in.
+ * 2. Listens for and manages nvAux window lifecylce events.
+ *
  */
 
-require('./core/');
+require('./core');
+const Store = require('electron-store');
 
 const { app, BrowserWindow } = require('electron');
 
-const { getRenderProcessUrl } = require('./utils');
+const { getRenderProcessUrl, getPreloadPath } = require('./core/utils');
+
+const store = new Store();
 
 let mainWindow;
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    minWidth: 200,
-    minHeight: 100,
-    width: 420,
-    height: 138,
+    minWidth: 300,
+    minHeight: 36,
+    width: store.get('window_dimensions.width') || 580,
+    height: store.get('window_dimensions.height') || 138,
     title: 'nvAux',
     frame: false,
     transparent: true,
     hasShadow: false,
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false,
+      preload: getPreloadPath()
     }
   });
   mainWindow.loadURL(getRenderProcessUrl());
 }
-
-app.allowRendererProcessReuse = true;
 
 /**
  * Emitted once, when Electron has finished initializing. On macOS, launchInfo

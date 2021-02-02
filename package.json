@@ -2,9 +2,9 @@
   "name": "nvaux",
   "version": "0.1.3",
   "private": true,
-  "main": "public/electron.js",
+  "main": "public/main.js",
   "homepage": "./",
-  "description": "A note-taking app that knows how to get weird",
+  "description": "the note-taking app that knows how to get weird.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -20,23 +20,24 @@
     "electron-pack": "electron-builder -m"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
-    "babel-runtime": "^6.26.0",
-    "chokidar": "^3.3.1",
-    "electron-updater": "^4.2.5",
-    "express-pouchdb": "^4.2.0",
-    "fdir": "^5.0.0",
+    "ace-builds": "^1.4.12",
+    "date-fns": "^2.16.1",
+    "electron-store": "^7.0.0",
+    "mobx": "^6.0.5",
+    "mobx-react": "^7.0.6",
     "mousetrap": "^1.6.5",
-    "pouchdb-adapter-http": "^7.2.2",
     "pouchdb-adapter-idb": "^7.2.2",
-    "pouchdb-adapter-memory": "^7.2.2",
-    "pouchdb-replication": "^7.2.2",
     "react": "^17.0.1",
+    "react-ace": "^9.3.0",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
     "react-resizable": "^1.10.1",
-    "react-rotary-knob": "^1.1.8",
-    "react-scripts": "4.0.1"
+    "react-scripts": "4.0.1",
+    "rxdb": "^9.11.0",
+    "rxdb-hooks": "^2.1.2",
+    "rxdb-utils": "^2.0.0-beta.2",
+    "rxjs": "^6.6.3",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@rescripts/cli": "^0.0.15",
@@ -44,7 +45,8 @@
     "concurrently": "^5.1.0",
     "electron": "^11.2.0",
     "electron-builder": "^22.4.1",
-    "electron-devtools-installer": "^3.0.0",
+    "electron-devtools-installer": "^3.1.1",
+    "electron-updater": "^4.2.5",
     "eslint": "^7.18.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^7.2.0",
@@ -55,13 +57,12 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.0.4",
     "pretty-quick": "^3.1.0",
-    "rxdb": "^9.11.0",
-    "rxdb-hooks": "^2.1.2",
-    "rxdb-utils": "^2.0.0-beta.2",
-    "rxjs": "^6.6.3",
     "typescript": "^4.1.3",
     "wait-on": "^5.2.1"
   },
+  "rescripts": [
+    "env"
+  ],
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -109,7 +110,23 @@
       "window": {
         "width": 540,
         "height": 380
-      }
+      },
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "extraMetadata": {
+      "main": "build/main.js"
     }
   }
 }
