@@ -1,8 +1,12 @@
+/**
+ * Electron-specific Utility Helpers authored by Billy Mays himself.
+ */
+
 const path = require('path');
-const { app, remote } = require('electron');
+const { app } = require('electron');
 
 const isDev = () => {
-  const nvaux = app || remote.app;
+  const nvaux = app
   const isEnvSet = 'ELECTRON_IS_DEV' in process.env;
   const getFromEnv = parseInt(process.env.ELECTRON_IS_DEV, 10) === 1;
   return isEnvSet ? getFromEnv : !nvaux.isPackaged;
@@ -26,9 +30,16 @@ const getSystemInfo = () => ({
 const getRenderProcessUrl = () => (
   isDev()
     ? 'http://localhost:3000'
-    : `file://${path.join(__dirname, '../build/index.html')}`
+    : `file://${path.join(__dirname, '../../build/index.html')}`
 )
+
+const getPreloadPath = () => (
+  path.join(app.getAppPath(), 'public/core/preload.js')
+);
 
 exports.isDev = isDev;
 exports.getSystemInfo = getSystemInfo;
 exports.getRenderProcessUrl = getRenderProcessUrl;
+exports.getPreloadPath = getPreloadPath;
+
+// Kidding...

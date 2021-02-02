@@ -25,4 +25,4 @@ Please be aware that while your contributions will be celebrated and credited ap
 yarn && yarn dev
 ```
 
-![](https://bpk-disk.s3.us-east-1.amazonaws.com/designed-by-abstractly-footer.png?c=2)
+![](https://bpk-disk.s3.us-east-1.amazonaws.com/designed-by-abstractly-footer.png?c=3)
