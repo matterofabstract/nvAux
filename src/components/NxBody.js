@@ -19,18 +19,18 @@ export const NxBody = () => {
       {() => (
         store.showPreferences
           ? <NxPreferences />
-          : <NxNotesBody />
+          : <NxNotesBody guidInFocus={store.guidInFocus} />
       )}
     </Observer>
   );
 }
 
-const NxNotesBody = () => {
+const NxNotesBody = ({ guidInFocus}) => {
   return (
     <>
       <NxOmnibar />
       <NxFileList />
-      <NxFileContent />
+      <NxFileContent guidInFocus={guidInFocus} />
     </>
   );
 }

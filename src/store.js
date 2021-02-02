@@ -1,14 +1,18 @@
 import React from 'react';
-import { useLocalStore } from 'mobx-react';
+import { useLocalObservable } from 'mobx-react';
 
 export const StoreContext = React.createContext();
 
 export const StoreProvider = ({ children }) => {
 
-  const store = useLocalStore(() => ({
+  const store = useLocalObservable(() => ({
     showPreferences: false,
     omniText: '',
+    guidInFocus: '',
 
+    setGuidInFocus: (guid) => {
+      store.guidInFocus = guid;
+    },
     setShowPreferences: () => {
       store.showPreferences = !store.showPreferences;
     },
