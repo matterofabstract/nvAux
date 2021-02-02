@@ -9,16 +9,25 @@ const noteSchema = {
   version: 0,
   type: 'object',
   properties: {
-    name: {
+    guid: {
       type: 'string',
       primary: true
+    },
+    name: {
+      type: 'string',
     },
     type: {
       type: 'string'
     },
     body: {
       type: 'string'
-    }
+    },
+    createdAt: {
+      type: "string"
+    },
+    updatedAt: {
+      type: "string"
+    },
   },
   required: ['name']
 };
@@ -31,7 +40,8 @@ export const initializeDB = async () => {
 
   await db.addCollections({
     notes: {
-      schema: noteSchema
+      schema: noteSchema,
+      autoMigrate: true
     }
   });
 

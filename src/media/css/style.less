@@ -171,6 +171,10 @@ body {
   }
 }
 
+/**
+ * Quick shoutout to TailwindCSS for showing us the way.
+ */
+
 .flex {
   display: flex;
 }
@@ -182,6 +186,42 @@ body {
 }
 .mb-3 {
   margin-bottom: 6px;
+}
+.px-1 {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.pl-1 {
+  padding-left: 3px;
+}
+.pr-1 {
+  padding-right: 3px;
+}
+.pr-3 {
+  padding-right: 6px;
+}
+.relative {
+  position: relative;
+}
+.border-box {
+  box-sizing: border-box;
+}
+.flex-grow-1 {
+  flex-grow: 1;
+}
+.whitespace-no-wrap {
+  white-space: nowrap;
+}
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.font-operator-mono {
+  font-family: 'Operator Mono';
+}
+.font-lato {
+  font-family: lato;
 }
 
 .mediabar {
@@ -221,8 +261,9 @@ body {
     padding-top: 3px;
     align-self: center;
     // background: #131517;
-    background-color: #161616;
-    box-shadow: inset 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+    // background-color: #161616;
+    // background-color: #1b1e20;
+    // box-shadow: inset 0 2px 3px 0 rgba(0, 0, 0, 0.5);
     border-radius: 3px;
     font-size: 12px;
     color: hsla(83, 100%, 57%, 0.733);
@@ -255,6 +296,10 @@ body {
   }
 }
 
+/**
+ * NxFileList ****************************************************************
+ */
+
 .file-list {
   width: 100%;
   height: 100%;
@@ -266,26 +311,19 @@ body {
     padding: 0;
     list-style-type: none;
     li {
-      white-space: nowrap;
-      overflow-x: hidden;
-      text-overflow: ellipsis;
+      display: flex;
       padding: 2px 2px 2px 10px;
       cursor: default;
     }
   }
   .file-type-symbol {
-    display: inline-block;
     width: 20px;
-    text-align: center;
-    margin-right: 10px;
-    margin-right: 10px;
-  }
-  .file-name {
-    font-family: lato;
+    position: relative;
+    top: 2px;
   }
   .file-preview {
-    font-family: 'Operator Mono';
     font-weight: 200;
+    padding-right: 10px;
   }
   .separator {
     display: inline-block;
@@ -293,6 +331,10 @@ body {
     color: #484a4b;
   }
 }
+
+/**
+ * NxFileContent *************************************************************
+ */
 
 .file-content {
   outline: none;
@@ -380,4 +422,8 @@ body {
 pre {
   margin: 0;
   padding: 0;
+}
+
+.ace-twilight {
+  background-color: transparent;
 }

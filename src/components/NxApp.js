@@ -1,40 +1,30 @@
-import React, { useState, useEffect } from 'react';
+/**
+ * NxApp - The highest-level component; the ui starts here.
+ *
+ * 1. Initialize the Database
+ * 2. Initialize save window dimension per users preference
+ * 3. Load the app
+ */
+
+import React from 'react';
 import { Provider } from 'rxdb-hooks';
 
-import { NxMediabar } from './NxMediabar';
-import { NxAppTray } from './NxAppTray';
+import { NxHeader } from './NxHeader';
 import { NxBody } from './NxBody';
 
 import { StoreProvider } from '../store';
-import { initializeDB } from './initializeDB';
+import { useInitDb, useSaveWindowDimensions } from '../hooks';
 
 import '../media/css/style.css';
 
 export const NxApp = () => {
-  const [db, setDb] = useState();
-
-  /**
-   * Database
-   */
-  useEffect(() => {
-    // Notice that RxDB instantiation is asynchronous; until db becomes available
-    // consumer hooks that depend on it will still work, absorbing the delay by
-    // setting their state to isFetching:true
-    const initDB = async () => {
-      const _db = await initializeDB();
-      setDb(_db);
-    };
-    initDB();
-  }, []);
-
+  const db = useInitDb();
+  useSaveWindowDimensions();
   return (
     <StoreProvider>
       <Provider db={db}>
         <div className="app">
-          <div className="flex mb-3">
-            <NxMediabar />
-            <NxAppTray />
-          </div>
+          <NxHeader />
           <NxBody />
         </div>
       </Provider>

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Observer } from 'mobx-react';
-import * as mousetrap from 'mousetrap';
 
 import { NxOmnibar } from './NxOmnibar';
 import { NxFileList } from './NxFileList';
@@ -8,43 +7,30 @@ import { NxFileContent } from './NxFileContent';
 import { NxPreferences } from './NxPreferences';
 
 import { StoreContext } from '../store';
+import { usePreferencePanelListener } from '../hooks';
 
-
-export const NxBody = (props) => {
+export const NxBody = () => {
   const store = React.useContext(StoreContext);
-  const [showPreferences, setShowPreferences] = useState(false);
 
-
-  /**
-   * App Preferences
-   */
-  useEffect(() => {
-    mousetrap.bind('command+,', () => setShowPreferences(!showPreferences));
-  }, [showPreferences]);
-
-  useEffect(() => {
-    window.ipcRenderer.on('open-preferences', (event, { OPEN }) => setShowPreferences(OPEN) );
-  }, []);
+  usePreferencePanelListener();
 
   return (
-    <Observer>{() => (
-      store.showPreferences ? (
-        <NxPreferences />
-      ) : (
-        <>
-          <NxNotesBody />
-        </>
-      )
-    )}</Observer>
+    <Observer>
+      {() => (
+        store.showPreferences
+          ? <NxPreferences />
+          : <NxNotesBody guidInFocus={store.guidInFocus} />
+      )}
+    </Observer>
   );
 }
 
-const NxNotesBody = () => {
+const NxNotesBody = ({ guidInFocus}) => {
   return (
     <>
       <NxOmnibar />
       <NxFileList />
-      <NxFileContent />
+      <NxFileContent guidInFocus={guidInFocus} />
     </>
   );
 }

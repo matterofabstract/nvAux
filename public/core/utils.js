@@ -1,3 +1,7 @@
+/**
+ * Electron-specific Utility Helpers authored by Billy Mays himself.
+ */
+
 const path = require('path');
 const { app } = require('electron');
 
@@ -37,3 +41,5 @@ exports.isDev = isDev;
 exports.getSystemInfo = getSystemInfo;
 exports.getRenderProcessUrl = getRenderProcessUrl;
 exports.getPreloadPath = getPreloadPath;
+
+// Kidding...

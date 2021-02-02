@@ -5,8 +5,10 @@
  *
  */
 
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Observer } from 'mobx-react';
+import { useRxData, useRxCollection} from 'rxdb-hooks';
+import { v4 as uuidv4 } from 'uuid';
 
 import { NxIcon } from './NxIcon';
 import { StoreContext } from '../store';
@@ -15,13 +17,9 @@ export const NxOmnibar = () => {
   const store = React.useContext(StoreContext);
   const inputEl = useRef(null);
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      console.log('focus on best match or create new...');
-    }
-  }
+  const notesCollection = useRxCollection('notes');
 
-  useEffect(() => {
+  // useEffect(() => {
     /**
      * TODO: autocompletion fill-in text selection
      *
@@ -35,7 +33,42 @@ export const NxOmnibar = () => {
      *   inputEl.current.selectionStart
      *
      */
-  }, []);
+  // }, []);
+
+  const queryConstructor = collection =>
+    collection
+      .find();
+
+  const { result: notes, isFetching } = useRxData(
+    'notes',
+    queryConstructor
+  );
+
+  if (isFetching) {
+    return 'loading characters...';
+  }
+
+  const handleKeyDown = async (e) => {
+    if (e.key === 'Enter') {
+      const val = e.target.value;
+      if (val === '') return;
+      const now = new Date().getTime().toString();
+      const alreadyExists = () => {
+        if (notes.some(n => n.name === val)) {
+          console.log(`already exists: "${val}"`);
+          return 1
+        }
+      }
+      if (!alreadyExists()) {
+        notesCollection.insert({
+          name: e.target.value,
+          guid: uuidv4(),
+          createdAt: now,
+          updatedAt: now
+        })
+      }
+    }
+  }
 
   return (
     <Observer>{() => (
