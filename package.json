@@ -1,6 +1,6 @@
 {
   "name": "nvaux",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "main": "public/electron.js",
   "homepage": "./",
