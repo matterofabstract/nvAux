@@ -20,6 +20,7 @@
     "electron-pack": "electron-builder -m"
   },
   "dependencies": {
+    "date-fns": "^2.16.1",
     "electron-store": "^7.0.0",
     "mobx": "^6.0.5",
     "mobx-react": "^7.0.6",

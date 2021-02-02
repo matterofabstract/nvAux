@@ -1,22 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useRxData } from 'rxdb-hooks';
-
-import { IconContext } from 'react-icons';
-import { FaBookmark, FaSoundcloud } from 'react-icons/fa';
-import { IoLogoJavascript } from 'react-icons/io';
 import { ResizableBox } from 'react-resizable';
+import { formatRelative } from 'date-fns'
 
+
+import { NxNoteTypeIcon } from './NxNoteTypeIcon';
 import { useWindowSize } from '../hooks';
-
-
-function getTypeColor(type) {
-  return {
-    url: '#32808e',
-    soundcloud: '#ffa502',
-    python: 'yellow',
-    javascript: '#eed819'
-  }[type];
-}
 
 export const NxFileList = () => {
   const [activeFileId, setActiveFileId] = useState();
@@ -42,33 +31,39 @@ export const NxFileList = () => {
     return 'loading notes...';
   }
 
-
   return (
     <ResizableBox width={size.width} height={fileList ? 200 : 100} axis={'y'}>
       <div className="file-list">
 
-        { fileList ? (<ul>
-          {fileList.map(({ guid, name, preview, type }) => (
-            <li key={guid} onClick={() => setActiveFileId(guid)} className={`${guid === activeFileId && 'active'}`}>
-              <div style={{ width: 25, display: 'inline-block' }}>
-                <IconContext.Provider
-                  value={{
-                    color: getTypeColor(type),
-                    className: 'file-type-symbol'
-                  }}
+        {fileList ? (
+          <ul>
+            {fileList
+              .sort((a, b) => a.updatedAt - b.updatedAt)
+              .reverse()
+              .map(({ guid, name, body, type, updatedAt }) => {
+                const updatedAtRelative = formatRelative(new Date(updatedAt * 1), new Date())
+                return (
+                <li
+                  key={guid} onMouseDown={() => setActiveFileId(guid)}
+                  className={`${guid === activeFileId && 'active'}`}
                 >
-                  {type === 'url' && <FaBookmark />}
-                  {type === 'soundcloud' && <FaSoundcloud />}
-                  {type === 'javascript' && <IoLogoJavascript />}
-                </IconContext.Provider>
-              </div>
-              <span className="file-name">{name}</span>
-              <span className="separator">—</span>
-              <span className="file-preview">{preview}</span>
-            </li>
-          ))}
-        </ul>)
-        : <div className="nothing-selected">create something to get started.</div>
+                  <div className="flex-grow-1 whitespace-no-wrap truncate">
+                    <span><NxNoteTypeIcon name={type} /></span>
+                    <span className="font-lato">{name}</span>
+                    <span className="separator">—</span>
+                    <span className="file-preview flex-grow-1 border-box font-operator-mono">this is some sort of long preview that will show off our sweet ellipsis effect on the body preview that is actually the full-lenth body copy but whatever. It's a feature, rigth?{body}</span>
+                  </div>
+
+                  <div>
+                    <span className="truncate font-operator-mono px-1" style={{ color: '#5a5a5a' }}>
+                      {updatedAtRelative}
+                    </span>
+                  </div>
+                </li>
+                )
+                })}
+          </ul>
+        ) : <div className="nothing-selected">create something to get started.</div>
         }
       </div>
     </ResizableBox>

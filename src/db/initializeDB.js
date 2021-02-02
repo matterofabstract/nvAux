@@ -40,7 +40,8 @@ export const initializeDB = async () => {
 
   await db.addCollections({
     notes: {
-      schema: noteSchema
+      schema: noteSchema,
+      autoMigrate: true
     }
   });
 

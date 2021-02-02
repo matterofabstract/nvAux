@@ -48,17 +48,25 @@ export const NxOmnibar = () => {
     return 'loading characters...';
   }
 
-
   const handleKeyDown = async (e) => {
     if (e.key === 'Enter') {
-      // Create Note using e.target.value
-      console.log('notes @@@@@@@@@@', notes);
-      notesCollection.insert({
-        name: e.target.value,
-        guid: uuidv4(),
-        createdAt: new Date().getTime().toString(),
-        updatedAt: new Date().getTime().toString()
-      })
+      const val = e.target.value;
+      if (val === '') return;
+      const now = new Date().getTime().toString();
+      const alreadyExists = () => {
+        if (notes.some(n => n.name === val)) {
+          console.log(`already exists: "${val}"`);
+          return 1
+        }
+      }
+      if (!alreadyExists()) {
+        notesCollection.insert({
+          name: e.target.value,
+          guid: uuidv4(),
+          createdAt: now,
+          updatedAt: now
+        })
+      }
     }
   }
 
