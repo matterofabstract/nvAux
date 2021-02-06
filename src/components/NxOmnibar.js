@@ -10,7 +10,7 @@ import { Observer } from 'mobx-react';
 import { useRxData, useRxCollection} from 'rxdb-hooks';
 import { v4 as uuidv4 } from 'uuid';
 
-import { NxIcon } from './NxIcon';
+import { NxIcon } from './micro/NxIcon';
 import { StoreContext } from '../store';
 
 export const NxOmnibar = () => {
@@ -55,7 +55,7 @@ export const NxOmnibar = () => {
       const now = new Date().getTime().toString();
       const alreadyExists = () => {
         if (notes.some(n => n.name === val)) {
-          console.log(`already exists: "${val}"`);
+          // console.log(`already exists: "${val}"`);
           return 1
         }
       }

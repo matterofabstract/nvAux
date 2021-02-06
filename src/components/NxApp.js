@@ -9,6 +9,7 @@
 import React from 'react';
 import { Provider } from 'rxdb-hooks';
 
+import { NxVideoPlayer } from './NxVideoPlayer';
 import { NxHeader } from './NxHeader';
 import { NxBody } from './NxBody';
 
@@ -24,6 +25,7 @@ export const NxApp = () => {
     <StoreProvider>
       <Provider db={db}>
         <div className="app">
+          <NxVideoPlayer />
           <NxHeader />
           <NxBody />
         </div>

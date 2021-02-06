@@ -1,9 +1,10 @@
 import React from 'react';
 import { FaBackward, FaPlay, FaForward } from 'react-icons/fa';
 
-import imgKnob from '../media/images/knob.png';
+import { NxRotaryKnob } from './NxRotaryKnob';
 
 export const NxMediabar = () => {
+  // const [value, setValue] = useState(0);
   const handleBackwardBtn = () => {
     console.log('<< backward button clicked.')
   }
@@ -27,12 +28,13 @@ export const NxMediabar = () => {
         </button>
       </div>
         <div className="" style={{ padding: '0 4px' }}>
-          <div style={{ position: 'relative', top: -3,  backgroundImage: `url(${imgKnob})`, backgroundSize: 'contain', width: 33, height: 28, }} />
+          <NxRotaryKnob />
+          {/* <div style={{ position: 'relative', top: -3,  backgroundImage: `url(${imgKnob})`, backgroundSize: 'contain', width: 33, height: 28, }} /> */}
         </div>
       <div className="display">
-        {/* <div>
-          Nothing Playing
-        </div> */}
+        <div>
+          {/* Noisia - The Hole Pt1 */}
+        </div>
       </div>
     </div>
   );

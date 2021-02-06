@@ -8,7 +8,7 @@ const { autoUpdater } = require('electron-updater');
 
 (async () => {
   await app.whenReady();
-  console.log('lets check for updates in the new autoUpdate.js file!');
+  // console.log('lets check for updates in the new autoUpdate.js file!');
   // autoUpdater.on('update-downloaded', () => {
   //   mainWindow.webContents.send('update_downloaded');
   // });
