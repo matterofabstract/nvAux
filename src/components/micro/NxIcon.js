@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconContext } from 'react-icons';
 
-import { FaCog, FaSearch, FaTimes, FaBookmark, FaSoundcloud, FaPython } from 'react-icons/fa';
+import { FaCog, FaSearch, FaTimes, FaBookmark, FaSoundcloud, FaPython, FaRegTrashAlt } from 'react-icons/fa';
 import { GiPartyPopper } from 'react-icons/gi';
 import { ImShuffle } from 'react-icons/im';
 import { IoLogoJavascript } from 'react-icons/io';
@@ -21,6 +21,7 @@ const getIcon = (name) => {
     'soundcloud': FaSoundcloud,
     'javascript': IoLogoJavascript,
     'python': FaPython,
+    'delete': FaRegTrashAlt,
   };
   return icons[name];
 }

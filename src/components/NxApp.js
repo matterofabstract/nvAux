@@ -10,7 +10,8 @@ import React from 'react';
 import { Provider } from 'rxdb-hooks';
 
 import { NxVideoPlayer } from './NxVideoPlayer';
-import { NxHeader } from './NxHeader';
+import { NxMediabar } from './NxMediabar';
+import { NxAppTray } from './NxAppTray';
 import { NxBody } from './NxBody';
 
 import { StoreProvider } from '../store';
@@ -26,7 +27,12 @@ export const NxApp = () => {
       <Provider db={db}>
         <div className="app">
           <NxVideoPlayer />
-          <NxHeader />
+
+          <div className="flex mb-1" style={{ height: 33 }}>
+            <NxMediabar />
+            <NxAppTray />
+          </div>
+
           <NxBody />
         </div>
       </Provider>

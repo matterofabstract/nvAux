@@ -100,10 +100,17 @@ const Menu = ({ outerRef }) => {
 
   if (menu) {
     return (
-      <ul className="menu" style={{ top: yPos, left: xPos }}>
-        <li>Item1</li>
-        <li>Item2</li>
-        <li>Item3</li>
+      <ul className="context-menu font-lato" style={{ top: yPos, left: xPos }}>
+        <li>Rename</li>
+        <li>Tag</li>
+        <li><NxIcon name="delete" /> Delete Note</li>
+        <li className="break"/>
+        <li>Copy URL...</li>
+        <li>Export</li>
+        <li>Show in Finder</li>
+        <li>Edit with...</li>
+        <li className="break"/>
+        <li>Print</li>
       </ul>
     );
   }
