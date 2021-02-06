@@ -38,7 +38,7 @@ const createWindow = () => {
     title: 'nvAux',
     frame: false,
     transparent: true,
-    hasShadow: false,
+    hasShadow: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
