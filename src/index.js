@@ -13,7 +13,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { NxApp } from './components';
+import { NxApp } from './components/NxApp';
 
 ReactDOM.render(
   <NxApp />,

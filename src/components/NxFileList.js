@@ -110,7 +110,7 @@ const Menu = ({ outerRef }) => {
         <li>Show in Finder</li>
         <li>Edit with...</li>
         <li className="break"/>
-        <li>Print</li>
+        <li>Print...</li>
       </ul>
     );
   }

@@ -1,1 +1,0 @@
-export { NxApp } from './NxApp';
