@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useRxData } from 'rxdb-hooks';
 import { ResizableBox } from 'react-resizable';
 import { formatRelative } from 'date-fns'
 import { Observer } from "mobx-react";
 
-import { NxNoteTypeIcon } from './NxNoteTypeIcon';
-import { useWindowSize } from '../hooks';
+import { NxIcon } from './micro/NxIcon';
+import { useWindowSize, useContextMenu } from '../hooks';
 import { StoreContext } from '../store';
 
 export const NxFileList = () => {
@@ -24,46 +24,88 @@ export const NxFileList = () => {
     return 'loading notes...';
   }
 
+  const handleEnterOnNote = (noteGuid) => {
+    console.log('handleEnterOnNote called')
+    if (noteGuid === store.guidInFocus) {
+      console.log('this is the active note')
+    }
+  }
+
   return (
     <ResizableBox width={size.width} height={notes ? 200 : 100} axis={'y'}>
       <div className="file-list">
-
         <Observer>{() => (
-
           notes ? (
             <ul>
               {notes
                 .sort((a, b) => a.updatedAt - b.updatedAt)
                 .reverse()
-                .map(({ guid, name, body, type, updatedAt }) => {
-                  const updatedAtRelative = formatRelative(new Date(updatedAt * 1), new Date())
+                .map((note) => {
+                  const updatedAtRelative = formatRelative(new Date(note.updatedAt * 1), new Date())
                   return (
-                  <li
-                    key={guid} onMouseDown={() => store.setGuidInFocus(guid)}
-                    className={`${guid === store.guidInFocus && 'active'}`}
-                  >
-                    <div className="flex-grow-1 whitespace-no-wrap truncate">
-                      <span><NxNoteTypeIcon name={type} /></span>
-                      <span className="font-lato">{name}</span>
-                      <span className="separator">—</span>
-                      <span className="file-preview flex-grow-1 border-box font-operator-mono">{body}</span>
-                    </div>
-
-                    <div>
-                      <span className="truncate font-operator-mono px-1" style={{ color: '#5a5a5a' }}>
-                        {updatedAtRelative}
-                      </span>
-                    </div>
-                  </li>
+                    <NxFileListItem
+                      key={note.guid}
+                      updatedAtRelative={updatedAtRelative}
+                      handleEnterOnNote={handleEnterOnNote}
+                      store={store}
+                      note={note}
+                    />
                   )
-                  })}
+                })
+              }
             </ul>
           ) : <div className="nothing-selected">create something to get started.</div>
-
-
         )}</Observer>
-
       </div>
     </ResizableBox>
   );
+};
+
+
+const NxFileListItem = (props) => {
+  const { guid, type, name, body } = props.note;
+  const { store, updatedAtRelative, handleEnterOnNote } = props;
+  const elementRef = useRef(null);
+
+  return (
+    <li
+      onMouseDown={() => store.setGuidInFocus(guid)}
+      onKeyDown={() => handleEnterOnNote(guid)}
+      className={`${guid === store.guidInFocus && 'active'}`}
+      ref={elementRef}
+    >
+      <Menu outerRef={elementRef}/>
+      <div className="flex-grow-1 whitespace-no-wrap truncate">
+        <span>
+          <div style={{ width: 25, display: 'inline-block' }}>
+            <NxIcon name={type} />
+          </div>
+        </span>
+        <span className="font-lato">{name}</span>
+        <span className="separator">—</span>
+        <span className="file-preview flex-grow-1 border-box font-operator-mono">{body}</span>
+      </div>
+
+      <div>
+        <span className="truncate font-operator-mono px-1" style={{ color: '#5a5a5a' }}>
+          {updatedAtRelative}
+        </span>
+      </div>
+    </li>
+  )
+}
+
+const Menu = ({ outerRef }) => {
+  const { xPos, yPos, menu } = useContextMenu(outerRef);
+
+  if (menu) {
+    return (
+      <ul className="menu" style={{ top: yPos, left: xPos }}>
+        <li>Item1</li>
+        <li>Item2</li>
+        <li>Item3</li>
+      </ul>
+    );
+  }
+  return <></>;
 };
