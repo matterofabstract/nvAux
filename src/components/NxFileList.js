@@ -1,11 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useRxData } from 'rxdb-hooks';
 import { ResizableBox } from 'react-resizable';
 import { formatRelative } from 'date-fns'
 import { Observer } from "mobx-react";
 
 import { NxIcon } from './micro/NxIcon';
-import { useWindowSize, useContextMenu } from '../hooks';
+import { useWindowSize, useContextMenu, useDoubleClick } from '../hooks';
 import { StoreContext } from '../store';
 
 export const NxFileList = () => {
@@ -63,35 +63,58 @@ export const NxFileList = () => {
 
 
 const NxFileListItem = (props) => {
+  const [showEditor, setShowEditor] = useState();
   const { guid, type, name, body } = props.note;
   const { store, updatedAtRelative, handleEnterOnNote } = props;
   const elementRef = useRef(null);
 
-  return (
-    <li
-      onMouseDown={() => store.setGuidInFocus(guid)}
-      onKeyDown={() => handleEnterOnNote(guid)}
-      className={`${guid === store.guidInFocus && 'active'}`}
-      ref={elementRef}
-    >
-      <Menu outerRef={elementRef}/>
-      <div className="flex-grow-1 whitespace-no-wrap truncate">
-        <span>
-          <div style={{ width: 25, display: 'inline-block' }}>
-            <NxIcon name={type} />
-          </div>
-        </span>
-        <span className="font-lato">{name}</span>
-        <span className="separator">—</span>
-        <span className="file-preview flex-grow-1 border-box font-operator-mono">{body}</span>
-      </div>
+  const changebackgroundColor = () => {
+    if (store.guidInFocus === guid) {
+      setShowEditor(true);
+    }
+    // elem.style.backgroundColor = getRandomColor();
+  }
+  const [refCallback, elem] = useDoubleClick(() => changebackgroundColor());
 
-      <div>
-        <span className="truncate font-operator-mono px-1" style={{ color: '#5a5a5a' }}>
-          {updatedAtRelative}
-        </span>
-      </div>
-    </li>
+  const onBlur = () => {
+    console.log('edit blurred')
+  }
+
+  return (
+    <>
+      <Menu outerRef={elementRef}/>
+      <li
+        onMouseDown={() => store.setGuidInFocus(guid)}
+        onKeyDown={() => handleEnterOnNote(guid)}
+        className={`${guid === store.guidInFocus && 'active'}`}
+        ref={elementRef}
+      >
+        <div className="flex-grow-1 whitespace-no-wrap truncate">
+          <span>
+            <div style={{ width: 25, display: 'inline-block', position: 'relative', top: 2 }}>
+              <NxIcon name={type} />
+            </div>
+          </span>
+          {showEditor ? (
+            <input type="text" value={name} />
+          ) : (
+            <>
+            <span className="font-lato" ref={refCallback}>{name}</span>
+            <span className="separator">—</span>
+            <span className="file-preview flex-grow-1 border-box font-operator-mono">
+              {body}
+            </span>
+          </>
+          )}
+        </div>
+
+        <div>
+          <span className="truncate font-operator-mono px-1" style={{ opacity: 0.6 }}>
+            {updatedAtRelative}
+          </span>
+        </div>
+      </li>
+    </>
   )
 }
 
@@ -100,7 +123,7 @@ const Menu = ({ outerRef }) => {
 
   if (menu) {
     return (
-      <ul className="context-menu font-lato" style={{ top: yPos, left: xPos }}>
+      <ul className="context-menu font-lato text-gray-400" style={{ top: yPos, left: xPos }}>
         <li>Rename</li>
         <li>Tag</li>
         <li><NxIcon name="delete" /> Delete Note</li>
