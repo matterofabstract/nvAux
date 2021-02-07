@@ -78,6 +78,7 @@ const NxFileListItem = (props) => {
 
   const onBlur = () => {
     console.log('edit blurred')
+    setShowEditor(false)
   }
 
   return (
@@ -89,17 +90,17 @@ const NxFileListItem = (props) => {
         className={`${guid === store.guidInFocus && 'active'}`}
         ref={elementRef}
       >
-        <div className="flex-grow-1 whitespace-no-wrap truncate">
+        <div ref={refCallback} className="flex-grow-1 whitespace-no-wrap truncate">
           <span>
             <div style={{ width: 25, display: 'inline-block', position: 'relative', top: 2 }}>
               <NxIcon name={type} />
             </div>
           </span>
           {showEditor ? (
-            <input type="text" value={name} />
+            <input autoFocus type="text" value={name} onBlur={onBlur} style={{ padding: 0, background: 'transparent', border: 'none', color: 'white', outline: 'none' }}/>
           ) : (
             <>
-            <span className="font-lato" ref={refCallback}>{name}</span>
+            <span className="font-lato">{name}</span>
             <span className="separator">—</span>
             <span className="file-preview flex-grow-1 border-box font-operator-mono">
               {body}
