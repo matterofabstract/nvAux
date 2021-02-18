@@ -23,8 +23,8 @@ export const NxApp = () => {
   const db = useInitDb();
   useSaveWindowDimensions();
   return (
-    <StoreProvider>
-      <Provider db={db}>
+    <Provider db={db}>
+      <StoreProvider>
         <div className="app">
           <NxVideoPlayer />
 
@@ -35,7 +35,7 @@ export const NxApp = () => {
 
           <NxBody />
         </div>
-      </Provider>
-    </StoreProvider>
+      </StoreProvider>
+    </Provider>
   );
 };
