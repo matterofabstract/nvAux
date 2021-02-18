@@ -34,6 +34,10 @@ export const StoreProvider = ({ children }) => {
       store.guidInFocus = guid;
     },
 
+    setDeleteNote: (guid) => {
+      // query db for note guid and delete it
+    },
+
   }));
 
   return (

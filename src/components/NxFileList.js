@@ -74,16 +74,19 @@ const NxFileListItem = (props) => {
     }
     // elem.style.backgroundColor = getRandomColor();
   }
-  const [refCallback, elem] = useDoubleClick(() => changebackgroundColor());
+  const [
+    refCallback,
+    // elem
+  ] = useDoubleClick(() => changebackgroundColor());
 
   const onBlur = () => {
-    console.log('edit blurred')
+    // console.log('edit blurred')
     setShowEditor(false)
   }
 
   return (
     <>
-      <Menu outerRef={elementRef}/>
+      <Menu outerRef={elementRef} showEditor={showEditor} setShowEditor={setShowEditor} />
       <li
         onMouseDown={() => store.setGuidInFocus(guid)}
         onKeyDown={() => handleEnterOnNote(guid)}
@@ -119,13 +122,18 @@ const NxFileListItem = (props) => {
   )
 }
 
-const Menu = ({ outerRef }) => {
-  const { xPos, yPos, menu } = useContextMenu(outerRef);
+const Menu = ({ outerRef, showEditor, setShowEditor }) => {
+  let { xPos, yPos, menu } = useContextMenu(outerRef);
+
+  const handleRename = () => {
+    menu = false;
+    setShowEditor(true);
+  }
 
   if (menu) {
     return (
       <ul className="context-menu font-lato text-gray-400" style={{ top: yPos, left: xPos }}>
-        <li>Rename</li>
+        <li onClick={handleRename}>Rename</li>
         <li>Tag</li>
         <li><NxIcon name="delete" /> Delete Note</li>
         <li className="break"/>
