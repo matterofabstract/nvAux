@@ -32,7 +32,7 @@ export const useDoubleClick = (callback) => {
           clearTimeout(timerRef.current);
           timerRef.current = null;
           countRef.current = 0;
-        }, 200);
+        }, 300);
         timerRef.current = timer;
       }
     }
