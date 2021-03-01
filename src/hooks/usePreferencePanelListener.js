@@ -14,7 +14,7 @@ export const usePreferencePanelListener = () => {
   }, [store]);
 
   useEffect(() => {
-    window.ipcRenderer.on('open-preferences', (event, { OPEN }) => store.setShowPreferences(OPEN) );
+    window.ipcRenderer && window.ipcRenderer.on('open-preferences', (event, { OPEN }) => store.setShowPreferences(OPEN) );
   }, [store]);
 };
 
