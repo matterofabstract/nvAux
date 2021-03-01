@@ -35,6 +35,7 @@ export const NxFileContentEditor = ({ note }) => {
         width="100%"
         showGutter={false}
         showPrintMargin={false}
+        focus={true}
         // editorProps={{ $blockScrolling: true }}
       />
     </div>

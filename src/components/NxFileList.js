@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useRxData } from 'rxdb-hooks';
 import { ResizableBox } from 'react-resizable';
 import { formatRelative } from 'date-fns'
@@ -67,6 +67,10 @@ const NxFileListItem = (props) => {
   const { guid, type, name, body } = props.note;
   const { store, updatedAtRelative, handleEnterOnNote } = props;
   const elementRef = useRef(null);
+
+  useEffect(() => {
+    // listen for up/down arrows to navigate notes list
+  }, []);
 
   const changebackgroundColor = () => {
     if (store.guidInFocus === guid) {
