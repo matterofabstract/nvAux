@@ -311,35 +311,31 @@ body {
   font-size: 10px;
 }
 
+.self-center {
+  align-self: center;
+}
+
 .mediabar {
   display: flex;
-  height: 30px;
   width: 100%;
-  padding-top: 6px;
-  box-sizing: border-box;
-
   .mediabar-controls {
-    height: 100%;
     display: flex;
-    box-sizing: border-box;
-
     button {
+      margin-top: 3px;
+      padding: 0 6px;
       background: none;
       border: none;
       color: inherit;
       padding: auto;
-
       &:active {
         color: white;
       }
-
       &:focus {
         outline: none;
       }
     }
-
     svg {
-      font-size: 11px;
+      font-size: 12px;
     }
   }
 
@@ -391,6 +387,11 @@ body {
     left: 7px;
   }
 }
+
+/**
+ * Omnibar *******************************************************************
+ */
+
 
 /**
  * NxFileList ****************************************************************

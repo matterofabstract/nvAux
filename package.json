@@ -5,7 +5,7 @@
   "main": "public/main.js",
   "homepage": "./",
   "description": "the note-taking app that knows how to get weird.",
-  "license": "MIT",
+  "license": "BSD-4-Clause",
   "repository": {
     "type": "git",
     "url": "https://github.com/matterofabstract/nvAux"
@@ -33,6 +33,7 @@
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
     "react-resizable": "^1.10.1",
+    "react-rotary-knob": "^1.1.8",
     "react-scripts": "4.0.3",
     "rxdb": "^9.15.0",
     "rxdb-hooks": "^2.1.2",

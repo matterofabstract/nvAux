@@ -9,8 +9,6 @@ import React, { useRef, useState } from 'react';
 
 import { useEventListener } from '../hooks';
 
-import imgKnob from '../media/images/knob.png';
-
 export const NxRotaryKnob = () => {
   const inputEl = useRef(null);
   // const store = React.useContext(StoreContext);
@@ -72,16 +70,12 @@ export const NxRotaryKnob = () => {
   useEventListener('mouseup', handleMouseup);
 
   return (
-    <div
-      ref={inputEl}
-      style={{
-        position: 'relative',
-        top: -3,
-        backgroundImage: `url(${imgKnob})`,
-        backgroundSize: 'contain',
-        width: 33,
-        height: 28
-      }}
-    />
+    <div className="knob-base">
+      <div
+        ref={inputEl}
+        className="currentVolumeMarker"
+      />
+    </div>
+
   );
 };
