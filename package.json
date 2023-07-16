@@ -10,7 +10,7 @@
     "url": "https://github.com/matterofabstract/nvAux"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview"
   },

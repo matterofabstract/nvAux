@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { format } from 'date-fns';
+  import { formatDistanceToNow } from 'date-fns';
 
   import { selectedNote, bodyText, db, omniText, omniMode, noteListHeight } from './store';
 
@@ -45,8 +45,14 @@
   });
 
   // const deleteNote = async (note) => await note.remove();
-  const formatDate = (str) => format(new Date(str).getTime(), "MMM d, yyyy 'at' h:mm a");
+  const formatDate = (str) => formatDistanceToNow(new Date(str).getTime(), {addSuffix: true});
   const handleSelectNoteMouseOver = (id) => isMouseDown && handleSelectNote(id);
+
+  const handleDeleteNote = async (note) => {
+    await note.remove();
+    selectedNote.set({});
+      omniText.set('');
+  };
 
   const handleSelectNote = (note) => {
     selectedNote.set(note);
@@ -80,19 +86,19 @@
         on:click={() => handleSelectNote(note)}
         on:keydown={() => handleSelectNote(note)}
         on:mouseover={() => handleSelectNoteMouseOver(note)}
-        style={$selectedNote === note && 'background: #0363e1; color: white;'}
+        style={$selectedNote === note && 'background: #2252a0; color: white;'}
       >
         <span class="elipsis" role="button" tabindex="-1" on:dblclick={() => document.getElementById('body-editor').focus()}>
           {note.name}
-          {#if note.body !== ''}<span style="color: #757575">—</span>{/if}
+          {#if note.body !== ''}<span style="color: #505050">—</span>{/if}
           <span class="mute" style={$selectedNote === note && 'color: #fff;'}>
             {note.body ?? ''}
           </span>
         </span>
 
-        <span class="meta" style={$selectedNote === note && 'background: #0363e1; color: white;'}>
+        <span class="meta" style={$selectedNote === note && 'background: #2252a0; color: white;'}>
           {formatDate(note.updatedAt)}
-          <!-- <button on:click={() => deleteNote(note)}>[del]</button> -->
+          <!-- <button on:click={() => handleDeleteNote(note)}>[del]</button> -->
         </span>
       </li>
     {/each}
@@ -104,38 +110,33 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    background: #f7f7f7;
     overflow-y: auto;
     overflow-x: hidden;
     list-style-type: none;
     border-bottom: none;
   }
   li {
-    padding: 2px 8px;
+    padding: 4px 8px;
     display: flex;
-    font-size: 12px;
+    font-size: 14px;
     justify-content: space-between;
     font-family: Helvetica, sans-serif;
     user-select: none;
+    color: rgb(205, 205, 205);
   }
   li:nth-child(odd) {
-    background: #f5f5f5;
+    background: #21262a;
   }
   li:nth-child(even) {
-    background: #f0f0f0;
+    background: #1d2225;
   }
   .meta {
-    min-width: 140px;
-    color: #444444;
+    color: #43484f;
     white-space: nowrap;
-  }
-  .elipsis {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    padding-right: 10px;
+    text-align: right;
+    font-size: 13px;
   }
   .mute {
-    color: #8d8d8d;
+    color: #65676c;
   }
 </style>

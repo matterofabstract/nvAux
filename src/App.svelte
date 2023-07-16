@@ -5,7 +5,7 @@
   import NoteDetail from './lib/NoteDetail.svelte';
 </script>
 
-<main class="w-screen h-screen flex justify-center flex-col">
+<main class="w-screen h-screen overflow-hidden flex flex-col">
   <OmniBar />
   <NoteList />
   <ResizeHandle />

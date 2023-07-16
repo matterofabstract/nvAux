@@ -29,34 +29,58 @@
 
   const addNote = async () => {
     const db$ = await db();
-    await db$.notes.insert({
-      guid: uuidv4(),
-      name: $omniText,
-      createdAt: new Date().getTime(),
-      updatedAt: new Date().getTime(),
-    }).then((note) => {
-      selectedNote.set(note)
-      omniMode.set('edit');
-    }).then(() => document.getElementById('body-editor').focus());
+    await db$.notes
+      .insert({
+        guid: uuidv4(),
+        name: $omniText,
+        createdAt: new Date().getTime(),
+        updatedAt: new Date().getTime(),
+      })
+      .then((note) => {
+        selectedNote.set(note);
+        omniMode.set('edit');
+      })
+      .then(() => document.getElementById('body-editor').focus());
   };
 </script>
 
-<svelte:window on:keydown={clearSelection}/>
+<svelte:window on:keydown={clearSelection} />
 
-<div class="omnibar flex items-center">
+<div class="omnibar flex items-center border-box border-b" style="border-color: #2e3338; background-color: #181a1c; height: 42px">
   <!-- <ImportNotesZip />
   <DownloadNotesZip /> -->
-  <div class="input-wrapper flex-grow">
-    <div class="icon left" >
-      {#if $omniMode === 'search'}
-        <IconSearch />
-      {:else}
-        <IconEdit />
-      {/if}
-    </div>
+  <div class="flex items-center" style="padding: 0 4px 0 10px; color: #444953;">
+    <IconSettings />
+  </div>
+  <!-- <div
+    on:click={() => omniInput.focus()}
+    on:keyup={() => omniInput.focus()}
+    role="button"
+    tabindex="-1"
+    class="px-2"
+    style="color: #444953;"
+  >
+    {#if $omniMode === 'search'}
+      <IconSearch />
+    {:else}
+      <IconEdit />
+    {/if}
+  </div> -->
+
+  <div class="input-wrapper flex-grow flex items-center">
+    <input
+      bind:this={omniInput}
+      bind:value={$omniText}
+      on:keydown={handleTitleEnter}
+      on:focus={omniInput.select()}
+      type="text"
+      class="flex-grow py-0.5 px-1 flex-grow"
+      placeholder="Search or Create"
+    />
     {#if $omniText !== ''}
       <button
-        class="icon right"
+        class="bg-transparent flex items-center px-2 py-1.5"
+        style="color: #404856;"
         on:click={() => {
           $omniText = '';
           $selectedNote = '';
@@ -65,56 +89,23 @@
         <IconXcircle />
       </button>
     {/if}
-
-
-  <input
-    bind:this={omniInput}
-    bind:value={$omniText}
-    on:keydown={handleTitleEnter}
-    on:focus={omniInput.select()}
-    type="text"
-    class="flex-grow py-0.5 px-1"
-    placeholder="Search or Create"
-  />
-  </div>
-  <div class="flex items-center" style="margin: 0 3px">
-    <IconSettings />
   </div>
 </div>
 
 <style>
-  .omnibar {
-    box-sizing: border-box;
-    padding-right: 3px;
-    border-bottom: 1px solid #959595;
-    background: linear-gradient(0deg, rgba(206, 206, 207, 1) 0%, rgba(228, 227, 229, 1) 100%);
-  }
-  .input-wrapper {
-    position: relative;
-    padding: 5px;
-  }
   input {
     width: 100%;
     box-sizing: border-box;
-    border: 1px solid #747474;
-    border-radius: 5px;
-    padding: 2px 4px 2px 20px;
-  }
-  .icon {
-    position: absolute;
-    color: #4b4b4b;
-  }
-  .left {
-    top: 8px;
-    left: 10px;
-  }
-  .right {
-    top: 13.5px;
-    right: 3px;
+    border-radius: 0px;
+    font-size: 17px;
     background: transparent;
-    cursor: pointer;
+    color: white;
+    height: 38px;
   }
-  .right:hover {
-    color: #202020;
+  input:focus {
+    outline: none;
+  }
+  input::placeholder {
+    color: #3e464d;
   }
 </style>

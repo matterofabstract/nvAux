@@ -10,9 +10,7 @@
 
   let innerHeight;
 
-  onMount(() => {
-    addRxPlugin(RxDBUpdatePlugin);
-  });
+  onMount(() => addRxPlugin(RxDBUpdatePlugin));
 
   const handleDebounceSave = debounce(() => !isEmptyObject($selectedNote) && updateNote(), 230);
 
@@ -30,9 +28,14 @@
 
 <svelte:window bind:innerHeight />
 
-<div class="flex items-center justify-center relative w-full h-full overflow-hidden" style="height: {innerHeight - noteEditorHeightOffset + 15}px">
-  {#if $selectedNote}
-    <textarea id="body-editor" class="block w-full h-full relative no-resize border-0 outline-none border-box" bind:value={$bodyText} on:keydown={handleDebounceSave} />
+<div class="relative overflow-hidden" >
+  {#if !isEmptyObject($selectedNote)}
+    <textarea
+      id="body-editor"
+      class="block w-full h-full relative no-resize border-0 outline-none border-box"
+      bind:value={$bodyText}
+      on:keydown={handleDebounceSave}
+    />
   {:else}
     <div class="placeholder relative">
       <h2>No Note Selected</h2>
@@ -47,7 +50,11 @@
   }
   textarea {
     padding: 6px;
-    background: #f6f6f6;
+    background: #1a1a1a;
+    color: rgba(255, 255, 255, 0.831);
+    font-size: 16px;
+    border-radius: none;
+    height: 100%;
   }
   .placeholder {
     top: -20%;
