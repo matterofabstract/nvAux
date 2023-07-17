@@ -12,7 +12,7 @@ a { color: inherit; text-decoration: inherit; }
 button, input, optgroup, select, textarea { padding: 0; line-height: inherit; color: inherit; }
 pre, code, kbd, samp { font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
-html, body { background-color: #262728; margin: 0; padding: 0; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 0.9rem; height: 100%; width: 100%; overflow: hidden;}
+html, body { background-color: #151618; margin: 0; padding: 0; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 0.9rem; height: 100%; width: 100%; overflow: hidden;}
 .w-screen {  width: 100vw; }
 .h-screen {  height: 100vh; }
 .flex { display: flex; }
@@ -54,3 +54,5 @@ html, body { background-color: #262728; margin: 0; padding: 0; font-family: Verd
 .bg-transparent { background-color: transparent; }
 .overflow-hidden { overflow: hidden; }
 .elipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-right: 10px; }
+.row-resize { cursor: row-resize; }
+.h-\[10px\] { height: 10px; }

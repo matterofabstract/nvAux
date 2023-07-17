@@ -112,16 +112,18 @@
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    list-style-type: none;
-    border-bottom: none;
+    background-color: #181a1c;
   }
   li {
-    padding: 4px 8px;
     display: flex;
+    align-items: center;
     font-size: 14px;
+    height: 35px;
+    padding: 10px;
     justify-content: space-between;
     font-family: Helvetica, sans-serif;
     user-select: none;
+    box-sizing: border-box;
     color: rgb(205, 205, 205);
   }
   li:nth-child(odd) {

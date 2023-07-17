@@ -14,14 +14,9 @@
       .then((zip) => {
         zip.forEach(async (relativePath, file) => {
           if (relativePath.startsWith('__MACOSX')) { return };
-
-          console.log('file @@@@@@@@@@@@@ ', file);
-
           const date = file.date.getTime();
-
           file.async('string')
             .then(async (body) => {
-              console.log('body @@@@@@@@@@@@@ ', body);
               await db$.notes.insert({
                 guid: uuidv4(),
                 name: file.name.split('/').pop().replace(/\.[^/.]+$/, ''),

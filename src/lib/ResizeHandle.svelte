@@ -7,9 +7,11 @@
   const startResize = () => (dragging = true);
   const stopResize = () => (dragging = false);
 
+  $:console.log('ddd', $noteListHeight)
+
   const handleResize = () => {
     if (!dragging) return;
-    noteListHeight.set($mousePosition.y >= 55 && $mousePosition.y - 55);
+    $noteListHeight = $mousePosition.y >= 42 && $mousePosition.y - 42;
     // TODO now check for page size and never allow the resize bar to go past the floor!
     return;
   };
@@ -25,15 +27,7 @@
 <div
   on:mousedown={startResize}
   on:touchstart={startResize}
-  class="w-full resize-bar select-none"
+  class="w-full resize-bar select-none row-resize h-[10px]"
   role="button"
   tabindex="-1"
 />
-
-<style>
-  .resize-bar {
-    height: 10px;
-    cursor: row-resize;
-    background: #1f1f1f;
-  }
-</style>
