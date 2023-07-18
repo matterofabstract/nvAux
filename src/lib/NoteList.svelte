@@ -111,6 +111,8 @@
     overflow-y: auto;
     overflow-x: hidden;
     background-color: #1c1f21;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
   li {
     display: flex;

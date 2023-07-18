@@ -42,8 +42,8 @@
 <svelte:window on:keydown={clearSelection} />
 
 <div
-  class="omnibar flex items-center border-box border-b"
-  style="border-color: #2e3338; background-color: #181a1c; height: 42px; padding-left: 10px;"
+  class="omnibar flex items-center border-box"
+  style="background-color: #181a1c; height: 42px; padding-left: 10px;"
 >
   <div class="input-wrapper flex-grow flex items-center">
     <input

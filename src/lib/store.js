@@ -33,12 +33,11 @@ const _create = async () => {
   const notes = await db.notes.find().exec();
 
   if (notes.length === 0) {
-    const date = new Date().getTime();
     await db.notes.insert({
       guid: '00000000-0000-0000-0000-000000000000',
       name: '⚙️ nvAux Settings...',
-      createdAt: date,
-      updatedAt: date
+      createdAt: new Date().getTime(),
+      updatedAt: new Date().getTime()
     });
 
     setTimeout (() => {

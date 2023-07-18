@@ -11,7 +11,7 @@
   };
 </script>
 
-<div class="px-2 text-white">
+<div class="text-white" style="padding: 0 15px;">
   <h2 style="font-size: 20px; line-height: 0;">nvAux Settings</h2>
   <div class="relative">
     {#await db().notes.find().exec()}
@@ -30,4 +30,5 @@
       style="background: #b41111;">Reset Database</button
     >
   </div>
+  <p>Hack on <a href="https://github.com/matterofabstract/nvaux" target="_blank" style="color: #ed0078; text-decoration: underline;">nvAux @ GitHub</a></p>
 </div>
