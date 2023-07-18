@@ -7,8 +7,6 @@
   const startResize = () => (dragging = true);
   const stopResize = () => (dragging = false);
 
-  $:console.log('ddd', $noteListHeight)
-
   const handleResize = () => {
     if (!dragging) return;
     $noteListHeight = $mousePosition.y >= 42 && $mousePosition.y - 42;

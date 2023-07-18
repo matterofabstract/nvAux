@@ -30,29 +30,32 @@ const _create = async () => {
 
   await db.addCollections({ notes: { schema } });
 
-//   const date = new Date().getTime();
-//   if (db.notes) {
-//     await db.notes.insert({
-//       guid: uuidv4(),
-//       name: '🚀 Welcome to nvAux!',
-//       body: `
-// Welcome aboard! nvAux is your new personal command center, designed to capture your thoughts and ideas swiftly and securely. Inspired by the principles of OmniFocus and David Allen's 'Getting Things Done', nvAux is more than just a note-taking app—it's a productivity powerhouse.
+  const notes = await db.notes.find().exec();
 
-// Here's a quick rundown of what you can do with nvAux:
 
-// Omni-Modal Input: Type or draw your thoughts into existence.
-// Offline-First: Your notes are always available, online or offline.
-// Encrypted Data: Your privacy is our priority. All your notes are encrypted.
-// Single HTML File: Carry nvAux in your pocket, on any device.
-// Dark/Light Theme: Work in the environment you prefer.
-// Dive into our User Guide to explore these features in detail, or check out our FAQs if you have any questions. Happy note-taking!
+  if (notes.length === 0) {
+    const date = new Date().getTime();
+    await db.notes.insert({
+      guid: uuidv4(),
+      name: '🚀 Welcome to nvAux!',
+      body: `
+Welcome aboard! nvAux is your new personal command center, designed to capture your thoughts and ideas swiftly and securely. Inspired by the principles of OmniFocus and David Allen's 'Getting Things Done', nvAux is more than just a note-taking app—it's a productivity powerhouse.
 
-// The nvAux Team
-//   `,
-//       createdAt: date,
-//       updatedAt: date
-//     });
-//   };
+Here's a quick rundown of what you can do with nvAux:
+
+Omni-Modal Input: Type or draw your thoughts into existence.
+Offline-First: Your notes are always available, online or offline.
+Encrypted Data: Your privacy is our priority. All your notes are encrypted.
+Single HTML File: Carry nvAux in your pocket, on any device.
+Dark/Light Theme: Work in the environment you prefer.
+Dive into our User Guide to explore these features in detail, or check out our FAQs if you have any questions. Happy note-taking!
+
+The nvAux Team
+  `,
+      createdAt: date,
+      updatedAt: date
+    });
+  };
 
   dbPromise = db;
   return db;

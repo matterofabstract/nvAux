@@ -46,6 +46,12 @@
   const toggleMenu = () => {
     showMenu = !showMenu;
   };
+
+  const handleDeleteCollection = async () => {
+    const db$ = await db();
+    // db$.notes.destroy();
+    db$.notes.remove();
+  };
 </script>
 
 <svelte:window on:keydown={clearSelection} />
@@ -70,7 +76,7 @@
         <li><div style="width: 10spx;" /> <ImportNotesZip /></li>
         <li><div style="width: 10spx;" /> <DownloadNotesZip /></li>
         <li class="break" />
-        <li><div style="width: 10spx;" /> Reset Database</li>
+        <li><div style="width: 10spx;" /> <button on:click={handleDeleteCollection} class="bg-transparent">Reset Database</button></li>
       </ul>
     {/if}
   </div>
@@ -131,6 +137,15 @@
     color: #3e464d;
   }
 
+  ul li:first-child {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+  ul li:last-child {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+
   li {
     height: 30px;
     display: flex;
@@ -139,6 +154,10 @@
     margin-bottom: 1px;
     box-sizing: border-box;
     color: #adadad;
+  }
+  li:hover {
+    background: #602661;
+    color: white;
   }
   li.break {
     height: 1px; padding: 0; margin: 0; border-bottom: 1px solid rgba(255,255,255,0.05);
