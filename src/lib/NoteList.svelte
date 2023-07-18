@@ -14,44 +14,36 @@
       db$.notes
         .find({
           selector: {
-            $or: [
-              { name: { $regex: `.*${$omniText}.*` } },
-              { body: { $regex: `.*${$omniText}.*` } }
-            ]
+            $or: [{ name: { $regex: `.*${$omniText}.*` } }, { body: { $regex: `.*${$omniText}.*` } }],
           },
-          sort: [
-            { updatedAt: 'desc'}
-          ]
+          sort: [{ updatedAt: 'desc' }],
         })
         .$.subscribe((notes) => (noteList = notes));
     };
     getNoteList();
   });
 
-  $: omniText.subscribe(v => {
-    db$ && !$selectedNote && db$.notes
-      .find({
-        selector: {
-          $or: [
-            { name: { $regex: `.*${v}.*` } },
-            { body: { $regex: `.*${v}.*` } }
-          ]
-        },
-        sort: [
-          { updatedAt: 'desc'}
-        ]
-      })
-    .$.subscribe((notes) => (noteList = notes))
+  $: omniText.subscribe((v) => {
+    db$ &&
+      !$selectedNote &&
+      db$.notes
+        .find({
+          selector: {
+            $or: [{ name: { $regex: `.*${v}.*` } }, { body: { $regex: `.*${v}.*` } }],
+          },
+          sort: [{ updatedAt: 'desc' }],
+        })
+        .$.subscribe((notes) => (noteList = notes));
   });
 
   // const deleteNote = async (note) => await note.remove();
-  const formatDate = (str) => formatDistanceToNow(new Date(str).getTime(), {addSuffix: true});
+  const formatDate = (str) => formatDistanceToNow(new Date(str).getTime(), { addSuffix: true });
   const handleSelectNoteMouseOver = (id) => isMouseDown && handleSelectNote(id);
 
   const handleDeleteNote = async (note) => {
     await note.remove();
     selectedNote.set({});
-      omniText.set('');
+    omniText.set('');
   };
 
   const handleSelectNote = (note) => {
@@ -70,6 +62,7 @@
       });
   };
 </script>
+
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <ul
   id="noteList"
@@ -88,7 +81,12 @@
         on:mouseover={() => handleSelectNoteMouseOver(note)}
         style={$selectedNote === note && 'background: #2252a0; color: white;'}
       >
-        <span class="elipsis" role="button" tabindex="-1" on:dblclick={() => document.getElementById('body-editor').focus()}>
+        <span
+          class="elipsis"
+          role="button"
+          tabindex="-1"
+          on:dblclick={() => document.getElementById('body-editor').focus()}
+        >
           {note.name}
           {#if note.body !== ''}<span style="color: #505050">—</span>{/if}
           <span class="mute" style={$selectedNote === note && 'color: #fff;'}>
@@ -112,7 +110,7 @@
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    background-color: #181a1c;
+    background-color: #1c1f21;
   }
   li {
     display: flex;
@@ -127,10 +125,10 @@
     color: rgb(205, 205, 205);
   }
   li:nth-child(odd) {
-    background: #21262a;
+    background: #2b2e31;
   }
   li:nth-child(even) {
-    background: #1d2225;
+    background: #222426;
   }
   .meta {
     color: #43484f;

@@ -25,20 +25,27 @@ const _create = async () => {
   const db = await createRxDatabase({
     name: 'nvauxdb',
     storage: getRxStorageDexie(),
-    // ignoreDuplicate: true
+    ignoreDuplicate: true
   });
 
   await db.addCollections({ notes: { schema } });
 
   const notes = await db.notes.find().exec();
 
-
   if (notes.length === 0) {
     const date = new Date().getTime();
     await db.notes.insert({
-      guid: uuidv4(),
-      name: '🚀 Welcome to nvAux!',
-      body: `
+      guid: '00000000-0000-0000-0000-000000000000',
+      name: '⚙️ nvAux Settings...',
+      createdAt: date,
+      updatedAt: date
+    });
+
+    setTimeout (() => {
+      db.notes.insert({
+        guid: uuidv4(),
+        name: '🚀 Welcome to nvAux!',
+        body: `
 Welcome aboard! nvAux is your new personal command center, designed to capture your thoughts and ideas swiftly and securely. Inspired by the principles of OmniFocus and David Allen's 'Getting Things Done', nvAux is more than just a note-taking app—it's a productivity powerhouse.
 
 Here's a quick rundown of what you can do with nvAux:
@@ -52,9 +59,10 @@ Dive into our User Guide to explore these features in detail, or check out our F
 
 The nvAux Team
   `,
-      createdAt: date,
-      updatedAt: date
-    });
+        createdAt: new Date().getTime(),
+        updatedAt: new Date().getTime()
+      });
+    }, 500)
   };
 
   dbPromise = db;

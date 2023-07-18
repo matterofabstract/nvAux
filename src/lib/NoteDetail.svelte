@@ -3,10 +3,12 @@
   import { onMount } from 'svelte';
   import { RxDBUpdatePlugin } from 'rxdb/plugins/update';
 
-  import { selectedNote } from './store';
+  import { db, selectedNote } from './store';
 
   import { debounce } from '../utils/debounce';
   import { isEmptyObject } from '../utils/isEmptyObject';
+
+  import Settings from './Settings.svelte';
 
   let innerHeight;
 
@@ -31,6 +33,8 @@
     <div class="relative w-full h-full flex items-center justify-center">
       <h2>No Note Selected</h2>
     </div>
+  {:else if $selectedNote.guid === '00000000-0000-0000-0000-000000000000'}
+    <Settings />
   {:else}
     <textarea
       id="body-editor"

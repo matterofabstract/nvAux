@@ -34,18 +34,13 @@
   };
 </script>
 
-<div>
-  <label for="file-upload">
-    Import Notes...
+  <label for="file-upload" class="btn bg-gray-800">
+    Import Notes
   </label>
-  <input id="file-upload" type="file" bind:files on:change={handleImport} />
-</div>
-
-<style>
-  input {
-    display: none;
-  }
-  label {
-    display: inline-block;
-  }
-</style>
+  <input
+    bind:files
+    on:change={handleImport}
+    id="file-upload"
+    type="file"
+    class="hidden"
+  />

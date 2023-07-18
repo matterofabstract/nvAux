@@ -2,12 +2,7 @@
   import { onMount } from 'svelte';
   import { v4 as uuidv4 } from 'uuid';
 
-  import DownloadNotesZip from './DownloadNotesZip.svelte';
-  import ImportNotesZip from './ImportNotesZip.svelte';
-  import IconSearch from './IconSearch.svelte';
-  import IconEdit from './IconEdit.svelte';
   import IconXcircle from './IconXcircle.svelte';
-  import IconSettings from './IconSettings.svelte';
 
   import { omniMode, omniText, selectedNote, db } from './store';
 
@@ -42,59 +37,14 @@
       })
       .then(() => document.getElementById('body-editor').focus());
   };
-
-  const toggleMenu = () => {
-    showMenu = !showMenu;
-  };
-
-  const handleDeleteCollection = async () => {
-    const db$ = await db();
-    // db$.notes.destroy();
-    db$.notes.remove();
-  };
 </script>
 
 <svelte:window on:keydown={clearSelection} />
 
 <div
   class="omnibar flex items-center border-box border-b"
-  style="border-color: #2e3338; background-color: #181a1c; height: 42px"
+  style="border-color: #2e3338; background-color: #181a1c; height: 42px; padding-left: 10px;"
 >
-  <div class="relative" style="padding: 0 4px 0 8px;">
-    <button on:click={toggleMenu} class="bg-transparent flex items-center" style="color: #444953;">
-      <IconSettings />
-    </button>
-    {#if showMenu}
-      <ul
-        class="absolute"
-        style="min-width: 180px; border: 1px solid rgba(255,255,255,0.1); z-index: 9999; border-radius: 6px; background: #0e0f11c4; top: 33px; left: 10px; color: white; list-style-type: none; margin: 0; padding: 0; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);"
-      >
-        <li><div style="width: 10spx;" /> About nvAux</li>
-        <li><div style="width: 10spx;" /> Leave Feedback...</li>
-        <li class="break" />
-
-        <li><div style="width: 10spx;" /> <ImportNotesZip /></li>
-        <li><div style="width: 10spx;" /> <DownloadNotesZip /></li>
-        <li class="break" />
-        <li><div style="width: 10spx;" /> <button on:click={handleDeleteCollection} class="bg-transparent">Reset Database</button></li>
-      </ul>
-    {/if}
-  </div>
-  <!-- <div
-    on:click={() => omniInput.focus()}
-    on:keyup={() => omniInput.focus()}
-    role="button"
-    tabindex="-1"
-    class="px-2"
-    style="color: #444953;"
-  >
-    {#if $omniMode === 'search'}
-      <IconSearch />
-    {:else}
-      <IconEdit />
-    {/if}
-  </div> -->
-
   <div class="input-wrapper flex-grow flex items-center">
     <input
       bind:this={omniInput}
@@ -134,32 +84,6 @@
     outline: none;
   }
   input::placeholder {
-    color: #3e464d;
-  }
-
-  ul li:first-child {
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-  }
-  ul li:last-child {
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-  }
-
-  li {
-    height: 30px;
-    display: flex;
-    align-items: center;
-    padding: 6px 10px;
-    margin-bottom: 1px;
-    box-sizing: border-box;
-    color: #adadad;
-  }
-  li:hover {
-    background: #602661;
-    color: white;
-  }
-  li.break {
-    height: 1px; padding: 0; margin: 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: #88959f;
   }
 </style>
