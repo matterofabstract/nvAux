@@ -16,6 +16,6 @@
   };
 </script>
 
-<button on:click={handleDownloadZip}>
-    Download
+<button on:click={handleDownloadZip} class="bg-transparent">
+    Download Notes (.zip)
 </button>

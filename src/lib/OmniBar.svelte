@@ -54,8 +54,6 @@
   class="omnibar flex items-center border-box border-b"
   style="border-color: #2e3338; background-color: #181a1c; height: 42px"
 >
-  <!-- <ImportNotesZip />
-  <DownloadNotesZip /> -->
   <div class="relative" style="padding: 0 4px 0 8px;">
     <button on:click={toggleMenu} class="bg-transparent flex items-center" style="color: #444953;">
       <IconSettings />
@@ -69,8 +67,8 @@
         <li><div style="width: 10spx;" /> Leave Feedback...</li>
         <li class="break" />
 
-        <li><div style="width: 10spx;" /> Import</li>
-        <li><div style="width: 10spx;" /> Export (.zip)</li>
+        <li><div style="width: 10spx;" /> <ImportNotesZip /></li>
+        <li><div style="width: 10spx;" /> <DownloadNotesZip /></li>
         <li class="break" />
         <li><div style="width: 10spx;" /> Reset Database</li>
       </ul>

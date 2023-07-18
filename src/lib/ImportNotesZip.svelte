@@ -36,24 +36,16 @@
 
 <div>
   <label for="file-upload">
-    [U]
+    Import Notes...
   </label>
   <input id="file-upload" type="file" bind:files on:change={handleImport} />
 </div>
 
 <style>
-  div {
-    position: absolute;
-    right: 28px;
-    top: 5px;
-  }
   input {
     display: none;
   }
   label {
     display: inline-block;
-    width: 12px;
-    height: 12px;
-    color: #535353;
   }
 </style>
