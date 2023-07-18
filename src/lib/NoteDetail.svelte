@@ -3,7 +3,7 @@
   import { onMount } from 'svelte';
   import { RxDBUpdatePlugin } from 'rxdb/plugins/update';
 
-  import { selectedNote, bodyText } from './store';
+  import { selectedNote } from './store';
 
   import { debounce } from '../utils/debounce';
   import { isEmptyObject } from '../utils/isEmptyObject';
@@ -17,7 +17,7 @@
   const updateNote = async () => {
     await $selectedNote.update({
       $set: {
-        body: $bodyText,
+        body: $selectedNote.body,
         updatedAt: new Date().getTime(),
       },
     });
@@ -35,7 +35,7 @@
     <textarea
       id="body-editor"
       class="block w-full h-full relative no-resize border-0 outline-none border-box"
-      bind:value={$bodyText}
+      bind:value={$selectedNote.body}
       on:keydown={handleDebounceSave}
     />
   {/if}

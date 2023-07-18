@@ -11,7 +11,7 @@
 
   import { omniMode, omniText, selectedNote, db } from './store';
 
-  let omniInput;
+  let omniInput, showMenu;
 
   onMount(() => omniInput.focus());
 
@@ -42,15 +42,39 @@
       })
       .then(() => document.getElementById('body-editor').focus());
   };
+
+  const toggleMenu = () => {
+    showMenu = !showMenu;
+  };
 </script>
 
 <svelte:window on:keydown={clearSelection} />
 
-<div class="omnibar flex items-center border-box border-b" style="border-color: #2e3338; background-color: #181a1c; height: 42px">
+<div
+  class="omnibar flex items-center border-box border-b"
+  style="border-color: #2e3338; background-color: #181a1c; height: 42px"
+>
   <!-- <ImportNotesZip />
   <DownloadNotesZip /> -->
-  <div class="flex items-center" style="padding: 0 4px 0 10px; color: #444953;">
-    <IconSettings />
+  <div class="relative" style="padding: 0 4px 0 8px;">
+    <button on:click={toggleMenu} class="bg-transparent flex items-center" style="color: #444953;">
+      <IconSettings />
+    </button>
+    {#if showMenu}
+      <ul
+        class="absolute"
+        style="min-width: 180px; border: 1px solid rgba(255,255,255,0.1); z-index: 9999; border-radius: 6px; background: #0e0f11c4; top: 33px; left: 10px; color: white; list-style-type: none; margin: 0; padding: 0; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);"
+      >
+        <li><div style="width: 10spx;" /> About nvAux</li>
+        <li><div style="width: 10spx;" /> Leave Feedback...</li>
+        <li class="break" />
+
+        <li><div style="width: 10spx;" /> Import</li>
+        <li><div style="width: 10spx;" /> Export (.zip)</li>
+        <li class="break" />
+        <li><div style="width: 10spx;" /> Reset Database</li>
+      </ul>
+    {/if}
   </div>
   <!-- <div
     on:click={() => omniInput.focus()}
@@ -97,7 +121,7 @@
     width: 100%;
     box-sizing: border-box;
     border-radius: 0px;
-    font-size: 17px;
+    font-size: 14px;
     background: transparent;
     color: white;
     height: 38px;
@@ -107,5 +131,18 @@
   }
   input::placeholder {
     color: #3e464d;
+  }
+
+  li {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    margin-bottom: 1px;
+    box-sizing: border-box;
+    color: #adadad;
+  }
+  li.break {
+    height: 1px; padding: 0; margin: 0; border-bottom: 1px solid rgba(255,255,255,0.05);
   }
 </style>
