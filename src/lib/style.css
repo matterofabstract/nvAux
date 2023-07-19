@@ -54,12 +54,17 @@ html, body { margin: 0; padding: 0; font-family: Verdana, Geneva, Tahoma, sans-s
 .row-resize { cursor: row-resize; }
 .select-none { user-select: none; }
 .smooth-scroll { scroll-behavior: smooth; }
+.text-center { text-align: center; }
+.font-bold { font-weight: 700; }
 .text-gray-600 { color: #718096; }
 .text-sm { font-size: 0.875rem; }
 .text-white { color: #fff; }
+.text-gray-400 { color: #a0aec0; }
 .truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .w-full { width: 100%; }
 .w-screen {  width: 100vw; }
+.transition-all { transition-property: all; transition-duration: 150ms; transition-timing-function: ease-in-out; }
+
 .btn { padding: 3px 10px; border-radius: 3px; font-size: 14px; }
 
 
@@ -80,4 +85,26 @@ body {
 	100% {
 		background-position: 0% 50%;
 	}
+}
+
+/* Light/Dark Mode Support */
+:root {
+	/* --background-color: white; */
+	--background-gradient: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	--text-color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		/* --background-color: black; */
+		--background-gradient: linear-gradient(-45deg, #813822, #7e183f, #125f7e, #0f755e);
+		--text-color: white;
+	}
+}
+
+body {
+	/* background-color: var(--background-color); */
+	background: var(--background-gradient);
+	color: var(--text-color);
+	transition: background-color 0.3s, color 0.3s;
 }

@@ -31,7 +31,7 @@
 
 <svelte:window bind:innerHeight />
 
-<div class="relative overflow-hidden h-full">
+<div class="relative overflow-hidden h-full overflow-y-auto" style="margin-bottom: 35px;">
   {#if isEmptyObject($selectedNote)}
     <div class="relative w-full h-full flex items-center justify-center">
       <h2 style="font-size: 18px; color: #525962">No Note Selected</h2>
@@ -41,7 +41,7 @@
   {:else}
     <textarea
       id="body-editor"
-      class="block w-full h-full relative no-resize border-0 outline-none border-box"
+      class="block w-full h-full relative no-resize border-0 outline-none border-box bg-transparent"
       bind:value={$bodyText}
       on:keydown={handleDebounceSave}
     />
@@ -50,8 +50,7 @@
 
 <style>
   textarea {
-    padding: 4px 15px;
-    background: #131313;
+    padding: 4px 13px;
     color: rgba(255, 255, 255, 0.831);
     font-size: 14px;
     font-family: Arial, Helvetica, sans-serif;
