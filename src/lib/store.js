@@ -12,6 +12,8 @@ import { schema } from './schema';
  */
 
 const storedNoteListHeight = localStorage.getItem('noteListHeight') || 100;
+const storedFullScreen = JSON.parse(localStorage.getItem('fullScreen')) || false;
+const storedMaximumFullScreen = JSON.parse(localStorage.getItem('maximumFullScreen')) || false;
 
 /**
  * RxDB ************************************************************************
@@ -32,36 +34,37 @@ const _create = async () => {
 
   const notes = await db.notes.find().exec();
 
-  if (notes.length === 0) {
-    await db.notes.insert({
-      guid: '00000000-0000-0000-0000-000000000000',
-      name: '⚙️ nvAux Settings...',
-      createdAt: new Date().getTime(),
-      updatedAt: new Date().getTime()
-    });
-
-    setTimeout (() => {
+  setTimeout(() => {
+    if (notes.length === 0) {
       db.notes.insert({
         guid: uuidv4(),
         name: '🚀 Welcome to nvAux!',
-        body: `
-Welcome aboard! nvAux is your new personal command center, designed to capture your thoughts and ideas swiftly and securely. Inspired by the principles of OmniFocus and David Allen's 'Getting Things Done', nvAux is more than just a note-taking app—it's a productivity powerhouse.
+        body: `Welcome and thank you for taking interest in nvAux!
 
-Here's a quick rundown of what you can do with nvAux:
+This is a web-based note-taking app inspired by nvALT. A few important things to note:
 
-Omni-Modal Input: Type or draw your thoughts into existence.
-Offline-First: Your notes are always available, online or offline.
-Encrypted Data: Your privacy is our priority. All your notes are encrypted.
-Single HTML File: Carry nvAux in your pocket, on any device.
-Dark/Light Theme: Work in the environment you prefer.
-Dive into our User Guide to explore these features in detail, or check out our FAQs if you have any questions. Happy note-taking!
-
-The nvAux Team
+* All your notes are stored locally in your browser.
+* Expect bugs, dead-ends, and missing features as it's still early in development.
+* Do no trust your data here yet. Testing purposes only.
+* 'Add to Home Screen' to feel more app-like.
   `,
         createdAt: new Date().getTime(),
         updatedAt: new Date().getTime()
       });
-    }, 500)
+    };
+  }, 100);
+
+  // Always make sure the Settings Note exists
+  let settingsNote = await db.notes.findOne('00000000-0000-0000-0000-000000000000').exec();
+
+  if (!settingsNote) {
+    await db.notes.insert({
+      guid: '00000000-0000-0000-0000-000000000000',
+      name: '⚙️ nvAux Settings',
+      body: 'Set your nvAux Preferences here',
+      createdAt: new Date().getTime(),
+      updatedAt: new Date().getTime()
+    });
   };
 
   dbPromise = db;
@@ -80,7 +83,8 @@ export const noteList = writable([]);
 export const noteListHeight = writable(storedNoteListHeight);
 export const selectedNote = writable({});
 export const bodyText = writable('');
-export const fullScreen = writable(false);
+export const fullScreen = writable(storedFullScreen);
+export const maximumFullScreen = writable(storedMaximumFullScreen);
 
 omniText.subscribe(v => {
   if (v === '') {
@@ -91,3 +95,6 @@ omniText.subscribe(v => {
 });
 
 noteListHeight.subscribe(v => localStorage.setItem('noteListHeight', v.toString()));
+
+fullScreen.subscribe(v => localStorage.setItem('fullScreen', v));
+maximumFullScreen.subscribe(v => localStorage.setItem('maximumFullScreen', v));

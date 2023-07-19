@@ -1,34 +1,60 @@
 <script>
-  import { db } from './store';
+  import { db, maximumFullScreen } from './store';
 
   import DownloadNotesZip from './DownloadNotesZip.svelte';
   import ImportNotesZip from './ImportNotesZip.svelte';
+  import AbstractlyLogo from './AbstractlyLogo.svelte';
 
   const handleDeleteCollection = async () => {
     const db$ = await db();
     // db$.notes.destroy();
+    localStorage.clear();
     db$.notes.remove();
+    location.reload();
   };
 </script>
 
-<div class="text-white" style="padding: 0 15px;">
-  <h2 style="font-size: 20px; line-height: 0;">nvAux Settings</h2>
+<div class="text-white h-full" style="margin-bottom: 100px; padding: 0px 15px;">
+  <h2 class="font-bold">nvAux Settings</h2>
   <div class="relative">
     {#await db().notes.find().exec()}
       <p>...waiting</p>
     {:then notes}
-      <p><span class="text-gray-600">Total Notes: </span>{notes.length}</p>
+      <p><span class="text-gray-400">Total Notes:</span> {notes.length}</p>
     {:catch error}
       <p style="color: red">{error.message}</p>
     {/await}
 
+    <h3 class="font-bold" style="margin-top: 25px;">General Preferences</h3>
+
+    <div>
+      <label for=""><input type="checkbox" bind:checked={$maximumFullScreen} /> Maximum Fullscreen</label>
+    </div>
+
+    <h3 class="font-bold" style="margin-top: 25px;">Import/Export Notes</h3>
+    <p class="text-gray-400">You can import (and export) a zip file full of .md and .txt files.</p>
+
     <ImportNotesZip />
     <DownloadNotesZip />
+
+    <h3 class="font-bold" style="margin-top: 25px;">Dangerzone</h3>
+
     <button
       on:click={handleDeleteCollection}
       class="btn"
       style="background: #b41111;">Reset Database</button
     >
   </div>
-  <p>Hack on <a href="https://github.com/matterofabstract/nvaux" target="_blank" style="color: #ed0078; text-decoration: underline;">nvAux @ GitHub</a></p>
+
+  <p style="margin-top: 100px;">
+    Designed and Built by
+    <span class="relative" style="display: inline-block; height: 30px; width: 80px; top: 13px;"><a href="https://abstractly.io" target="_blank">
+      <AbstractlyLogo />
+    </a></span> The Human Interface Company.
+  </p>
+  <p style="margin-top: 10px;">Hack on
+    <a href="https://github.com/matterofabstract/nvaux" target="_blank" style="color: #ed0078; text-decoration: underline;">
+      nvAux @ GitHub
+    </a>
+  </p>
 </div>
