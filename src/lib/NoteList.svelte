@@ -68,7 +68,7 @@
   id="noteList"
   on:mousedown={() => (isMouseDown = true)}
   on:mouseup={() => (isMouseDown = false)}
-  style="height: {$noteListHeight}px"
+  style="height: {$noteListHeight}px;"
 >
   {#await noteList}
     Loading Notes...
@@ -110,7 +110,7 @@
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    background-color: #1c1f21;
+    background-color: var(--app-omni-background);
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
   }
@@ -127,10 +127,10 @@
     color: rgb(205, 205, 205);
   }
   li:nth-child(odd) {
-    background: #2b2e31;
+    background: var(--app-notelist-odd-background);
   }
   li:nth-child(even) {
-    background: #222426;
+    background: var(--app-notelist-even-background);
   }
   .meta {
     color: #43484f;

@@ -11,9 +11,10 @@ import { schema } from './schema';
  * State that persists to localStorage =========================================
  */
 
-const storedNoteListHeight = localStorage.getItem('noteListHeight') || 100;
+const storedNoteListHeight = localStorage.getItem('noteListHeight') || 220;
 const storedFullScreen = JSON.parse(localStorage.getItem('fullScreen')) || false;
 const storedMaximumFullScreen = JSON.parse(localStorage.getItem('maximumFullScreen')) || false;
+const storedShowClock = JSON.parse(localStorage.getItem('showClock')) || "true";
 
 /**
  * RxDB ************************************************************************
@@ -34,10 +35,12 @@ const _create = async () => {
 
   const notes = await db.notes.find().exec();
 
+  let welcomeNote = await db.notes.findOne('11111111-1111-1111-1111-111111111111').exec();
+
   setTimeout(() => {
-    if (notes.length === 0) {
+    if (notes.length === 0 && !welcomeNote) {
       db.notes.insert({
-        guid: uuidv4(),
+        guid: '11111111-1111-1111-1111-111111111111',
         name: '🚀 Welcome to nvAux!',
         body: `Welcome and thank you for taking interest in nvAux!
 
@@ -85,6 +88,8 @@ export const selectedNote = writable({});
 export const bodyText = writable('');
 export const fullScreen = writable(storedFullScreen);
 export const maximumFullScreen = writable(storedMaximumFullScreen);
+export const showClock = writable(storedShowClock);
+
 
 omniText.subscribe(v => {
   if (v === '') {
@@ -98,3 +103,4 @@ noteListHeight.subscribe(v => localStorage.setItem('noteListHeight', v.toString(
 
 fullScreen.subscribe(v => localStorage.setItem('fullScreen', v));
 maximumFullScreen.subscribe(v => localStorage.setItem('maximumFullScreen', v));
+showClock.subscribe(v => localStorage.setItem('showClock', v));

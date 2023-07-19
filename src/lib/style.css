@@ -69,10 +69,51 @@ html, body { margin: 0; padding: 0; font-family: Verdana, Geneva, Tahoma, sans-s
 
 
 body {
-	background: linear-gradient(-45deg, #714436, #72354d, #334169, #4c746a);
+	background: linear-gradient(-45deg, #ea8060, #e4578d, #a1d0e1, #70e1c7);
 	background-size: 400% 400%;
 	animation: gradient 40s ease-in-out infinite;
 	height: 100vh;
+	/* background: var(--background); */
+	/* background: var(--background-gradient); */
+	color: var(--text-color);
+	/* transition: background-color 0.3s, color 0.3s; */
+}
+
+/* Light/Dark Mode Support */
+:root {
+	/* --background-color: white; */
+	/* --background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
+	--text-color: black;
+	--app-background: #eaeaea;
+	--app-omni-background: #d8d8d8;
+	--app-statusbar-background: #d1d1d1;
+	--app-statusbar-border: #c4c4c4;
+	--app-notedetail-background: #d9dde1;
+	--app-notelist-odd-background: #e9e9e9;
+	--app-notelist-even-background: #e3e3e3;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		/* --background-color: black; */
+		/* --background: linear-gradient(-45deg, #813822, #7e183f, #125f7e, #0f755e); */
+		--text-color: white;
+		--app-background: #181a1c;
+		--app-omni-background: #181a1c;
+		--app-statusbar-background: #151719;
+		--app-statusbar-border: #c4c4c4;
+		--app-statusbar-border: #24272a;
+		--app-notedetail-background: #1c1f21;
+		--app-notelist-odd-background: #222426;
+		--app-notelist-even-background: #2c2e31;
+	}
+
+	body {
+		background: linear-gradient(-45deg, #714436, #72354d, #334169, #4c746a);
+		background-size: 400% 400%;
+		animation: gradient 40s ease-in-out infinite;
+		height: 100vh;
+	}
 }
 
 @keyframes gradient {
@@ -85,26 +126,4 @@ body {
 	100% {
 		background-position: 0% 50%;
 	}
-}
-
-/* Light/Dark Mode Support */
-:root {
-	/* --background-color: white; */
-	--background-gradient: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-	--text-color: black;
-}
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		/* --background-color: black; */
-		--background-gradient: linear-gradient(-45deg, #813822, #7e183f, #125f7e, #0f755e);
-		--text-color: white;
-	}
-}
-
-body {
-	/* background-color: var(--background-color); */
-	/* background: var(--background-gradient); */
-	color: var(--text-color);
-	/* transition: background-color 0.3s, color 0.3s; */
 }
