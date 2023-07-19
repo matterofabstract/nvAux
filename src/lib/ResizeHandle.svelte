@@ -36,8 +36,8 @@
 
 <div
   on:mousedown={startResize.bind(this, 'left')}
-  class="w-full resize-bar select-none row-resize h-[10px]"
-  style="background: var(--app-notedetail-background) * 20%;"
+  class="w-full resize-bar select-none row-resize"
+  style="background: var(--app-resizer-background); height: 15px;"
   role="button"
   tabindex="-1"
 />

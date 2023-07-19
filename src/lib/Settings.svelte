@@ -14,7 +14,7 @@
   };
 </script>
 
-<div class="text-white h-full" style="margin-bottom: 100px; padding: 0px 15px; margin: 0;">
+<div class="text-white h-full" style="margin-bottom: 100px; padding: 5px 15px; margin: 0;">
   <span class="font-bold">nvAux Settings</span>
   <div class="relative">
     {#await db().notes.find().exec()}
