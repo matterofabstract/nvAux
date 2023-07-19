@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { format } from 'date-fns';
-  import { fullScreen } from './store';
+  import { fullScreen, showClock } from './store';
 
   let time = new Date();
 
@@ -18,7 +18,7 @@
 
 <div
   class="px-2 flex items-center absolute w-full flex-grow-0"
-  style="font-size: 12px; height: 35px; background: #151719; bottom: 0; left: 0; color: #606060; border-top: 1px solid #1d1e20;"
+  style="font-size: 12px; height: 35px; background: var(--app-statusbar-background); bottom: 0; left: 0; color: #606060; border-top: 1px solid var(--app-statusbar-border);"
 >
   <div class="flex-grow">nvAux v0.1.5-20230719-001</div>
   <div>
@@ -30,5 +30,7 @@
       {/if}
     </button>
   </div>
-  <div>{format(time, 'hh:mm:ss a')}</div>
+  {#if $showClock}
+     <div>{format(time, 'hh:mm:ss a')}</div>
+  {/if}
 </div>

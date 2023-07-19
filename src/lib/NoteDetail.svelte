@@ -3,7 +3,7 @@
   import { onMount } from 'svelte';
   import { RxDBUpdatePlugin } from 'rxdb/plugins/update';
 
-  import { selectedNote, bodyText } from './store';
+  import { db, selectedNote, bodyText } from './store';
 
   import { debounce } from '../utils/debounce';
   import { isEmptyObject } from '../utils/isEmptyObject';
@@ -11,10 +11,12 @@
   import Settings from './Settings.svelte';
 
   let innerHeight;
+  let db$;
 
-  onMount(() => {
+  onMount(async () => {
     addRxPlugin(RxDBUpdatePlugin);
-    if ($selectedNote.body) $bodyText = $selectedNote.body;
+    db$ = await db();
+    db$.notes.findOne($selectedNote.guid).exec();
   });
 
   const handleDebounceSave = debounce(() => !isEmptyObject($selectedNote) && updateNote(), 500);
@@ -31,7 +33,7 @@
 
 <svelte:window bind:innerHeight />
 
-<div class="relative overflow-hidden h-full overflow-y-auto" style="margin-bottom: 35px;">
+<div class="relative overflow-hidden h-full overflow-y-auto" style="margin-bottom: 35px; background: var(--app-notedetail-background);">
   {#if isEmptyObject($selectedNote)}
     <div class="relative w-full h-full flex items-center justify-center">
       <h2 style="font-size: 18px; color: #525962">No Note Selected</h2>

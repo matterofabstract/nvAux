@@ -17,7 +17,7 @@
   {/if}
   <main
     class="{$fullScreen ? 'fullscreen' : 'windowed'} relative overflow-hidden flex flex-col transition-all"
-    style="{$fullScreen ? $maximumFullScreen ? 'height: 100%; width: 100%;' : 'height: calc(100vh - 8px); width: calc(100vw - 8px); border-radius: 8px;' : ''} background-color: #181a1c;"
+    style="{$fullScreen ? $maximumFullScreen ? 'height: 100%; width: 100%;' : 'height: calc(100vh - 8px); width: calc(100vw - 8px); border-radius: 8px;' : ''} background-color: var(--app-background);"
   >
     <OmniBar />
     <NoteList />

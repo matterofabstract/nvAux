@@ -1,5 +1,5 @@
 <script>
-  import { db, maximumFullScreen } from './store';
+  import { db, maximumFullScreen, showClock } from './store';
 
   import DownloadNotesZip from './DownloadNotesZip.svelte';
   import ImportNotesZip from './ImportNotesZip.svelte';
@@ -14,8 +14,8 @@
   };
 </script>
 
-<div class="text-white h-full" style="margin-bottom: 100px; padding: 0px 15px;">
-  <h2 class="font-bold">nvAux Settings</h2>
+<div class="text-white h-full" style="margin-bottom: 100px; padding: 0px 15px; margin: 0;">
+  <span class="font-bold">nvAux Settings</span>
   <div class="relative">
     {#await db().notes.find().exec()}
       <p>...waiting</p>
@@ -28,7 +28,10 @@
     <h3 class="font-bold" style="margin-top: 25px;">General Preferences</h3>
 
     <div>
-      <label for=""><input type="checkbox" bind:checked={$maximumFullScreen} /> Maximum Fullscreen</label>
+      <label for="showClock"><input id="showClock" type="checkbox" bind:checked={$showClock} /> Show Clock</label>
+    </div>
+    <div>
+      <label for="maxfullscreen"><input id="maxfullscreen" type="checkbox" bind:checked={$maximumFullScreen} /> Maximum Fullscreen</label>
     </div>
 
     <h3 class="font-bold" style="margin-top: 25px;">Import/Export Notes</h3>

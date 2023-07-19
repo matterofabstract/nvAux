@@ -1,31 +1,43 @@
 <script>
   import { noteListHeight } from './store';
-  import mousePosition from '../utils/mousePosition';
 
   let dragging = false;
+  let start, initial = null;
+  let y;
 
-  const startResize = () => (dragging = true);
-  const stopResize = () => (dragging = false);
+  $: height = 100;
 
-  const handleResize = () => {
+  // const startResize = () => (dragging = true);
+  const startResize = (type, event) => {
+    event.preventDefault();
+    dragging = true;
+    start = event.pageY;
+    initial = { y, height };
+  };
+
+  // const stopResize = () => (dragging = false);
+  const stopResize = () => {
+    dragging = false;
+    start = null;
+    initial = null;
+  };
+
+  const handleResize = (event) => {
+    event.preventDefault();
     if (!dragging) return;
-    $noteListHeight = $mousePosition.y >= 42 && $mousePosition.y - 42;
-    // TODO now check for page size and never allow the resize bar to go past the floor!
+    const delta = start - event.pageY;
+    height = initial.height - delta;
+    $noteListHeight = height;
     return;
   };
 </script>
 
-<svelte:window
-  on:mouseup={stopResize}
-  on:mousemove={handleResize}
-  on:touchend={stopResize}
-  on:touchmove={handleResize}
-/>
+<svelte:window on:mouseup={stopResize} on:mousemove={handleResize} on:mouseup={stopResize} />
 
 <div
-  on:mousedown={startResize}
-  on:touchstart={startResize}
+  on:mousedown={startResize.bind(this, 'left')}
   class="w-full resize-bar select-none row-resize h-[10px]"
+  style="background: var(--app-notedetail-background) * 20%;"
   role="button"
   tabindex="-1"
 />

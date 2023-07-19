@@ -43,7 +43,7 @@
 
 <div
   class="omnibar flex items-center border-box"
-  style="background-color: #181a1c; height: 42px; padding-left: 10px;"
+  style="background-color: var(--app-omni-background); height: 42px; padding-left: 10px;"
 >
   <div class="input-wrapper flex-grow flex items-center">
     <input
