@@ -80,6 +80,7 @@ export const noteList = writable([]);
 export const noteListHeight = writable(storedNoteListHeight);
 export const selectedNote = writable({});
 export const bodyText = writable('');
+export const fullScreen = writable(false);
 
 omniText.subscribe(v => {
   if (v === '') {
