@@ -12,7 +12,7 @@ a { color: inherit; text-decoration: inherit; }
 button, input, optgroup, select, textarea { padding: 0; line-height: inherit; color: inherit; }
 pre, code, kbd, samp { font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
-html, body { margin: 0; padding: 0; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 0.9rem; height: 100vh; width: 100vw; overflow: hidden;}
+html, body { margin: 0; padding: 0; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 0.9rem; height: 100dvh; width: 100dvw; overflow: hidden;}
 .absolute { position: absolute; }
 .bg-gray-200 { background-color: #edf2f7; }
 .bg-gray-800 { background-color: #2d3748; }
@@ -28,7 +28,7 @@ html, body { margin: 0; padding: 0; font-family: Verdana, Geneva, Tahoma, sans-s
 .flex-grow-0 { flex-grow: 0; }
 .h-\[10px\] { height: 10px; }
 .h-full { height: 100%; }
-.h-screen {  height: 100vh; }
+.h-screen {  height: 100dvh; }
 .hidden { display: none; }
 .items-center { align-items: center; }
 .justify-between { justify-content: space-between; }
@@ -63,20 +63,18 @@ html, body { margin: 0; padding: 0; font-family: Verdana, Geneva, Tahoma, sans-s
 .truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .w-full { width: 100%; }
 .w-screen {  width: 100vw; }
-.transition-all { transition-property: all; transition-duration: 500ms; transition-timing-function: ease-in-out; }
+.transition-all { transition-property: all; transition-duration: 500ms; transition-timing-function: ease; }
 
-.btn { padding: 3px 10px; border-radius: 3px; font-size: 14px; }
+.btn { padding: 12px 20px; border-radius: 3px; font-size: 14px; }
 
 
 body {
 	background: linear-gradient(-45deg, #ea8060, #e4578d, #a1d0e1, #70e1c7);
 	background-size: 400% 400%;
 	animation: gradient 40s ease-in-out infinite;
-	height: 100vh;
 	/* background: var(--background); */
 	/* background: var(--background-gradient); */
 	color: var(--text-color);
-	/* transition: background-color 0.3s, color 0.3s; */
 }
 
 /* Light/Dark Mode Support */
@@ -113,7 +111,6 @@ body {
 		background: linear-gradient(-45deg, #714436, #72354d, #334169, #4c746a);
 		background-size: 400% 400%;
 		animation: gradient 40s ease-in-out infinite;
-		height: 100vh;
 	}
 }
 

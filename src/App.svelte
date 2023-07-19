@@ -9,15 +9,15 @@
 </script>
 
 <div class="h-screen w-screen overflow-hidden flex flex-col justify-center items-center {$fullScreen ? '' : 'p-2'}">
-  {#if !$fullScreen}
-    <div class="absolute text-center" style="top: 10px; opacity: 0.7">
+
+    <div class="transition-all absolute text-center" style="top: 1%; {$fullScreen ? 'opacity: 0; top: -100px;' : 'opacity: 1;' }">
       <h1>nvAux</h1>
       <p>Capture and retrieve ideas at the speed of thought with nvAux, the in-the-zone, aint-nobody-stopping-me note-taking app for creative professionals.</p>
     </div>
-  {/if}
+
   <main
     class="{$fullScreen ? 'fullscreen' : 'windowed'} relative overflow-hidden flex flex-col transition-all"
-    style="{$fullScreen ? $maximumFullScreen ? 'height: 100%; width: 100%;' : 'height: calc(100vh - 8px); width: calc(100vw - 8px); border-radius: 8px;' : ''} background-color: var(--app-background);"
+    style="{$fullScreen ? $maximumFullScreen ? 'height: 100%; width: 100%;' : 'height: calc(100dvh - 15px); width: calc(100vw - 15px); border-radius: 8px;' : ''} background-color: var(--app-background);"
   >
     <OmniBar />
     <NoteList />
@@ -47,7 +47,6 @@
   main.windowed {
     max-width: 690px;
     width: 100%;
-    min-width: 200px;
     height: 50%;
     min-height: 300px;
     border-radius: 8px;
