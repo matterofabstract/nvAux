@@ -63,15 +63,15 @@ html, body { margin: 0; padding: 0; font-family: Verdana, Geneva, Tahoma, sans-s
 .truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .w-full { width: 100%; }
 .w-screen {  width: 100vw; }
-.transition-all { transition-property: all; transition-duration: 150ms; transition-timing-function: ease-in-out; }
+.transition-all { transition-property: all; transition-duration: 500ms; transition-timing-function: ease-in-out; }
 
 .btn { padding: 3px 10px; border-radius: 3px; font-size: 14px; }
 
 
 body {
-	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background: linear-gradient(-45deg, #714436, #72354d, #334169, #4c746a);
 	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
+	animation: gradient 40s ease-in-out infinite;
 	height: 100vh;
 }
 
@@ -104,7 +104,7 @@ body {
 
 body {
 	/* background-color: var(--background-color); */
-	background: var(--background-gradient);
+	/* background: var(--background-gradient); */
 	color: var(--text-color);
-	transition: background-color 0.3s, color 0.3s;
+	/* transition: background-color 0.3s, color 0.3s; */
 }
