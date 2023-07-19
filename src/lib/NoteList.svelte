@@ -43,7 +43,9 @@
   const handleDeleteNote = async (note) => {
     await note.remove();
     selectedNote.set({});
-    omniText.set('');
+    $omniText = '';
+    $omniMode = 'search';
+    $bodyText = '';
   };
 
   const handleSelectNote = (note) => {
@@ -57,8 +59,8 @@
       .exec()
       .then((n) => {
         omniMode.set('edit');
-        omniText.set(n.name);
-        bodyText.set(n.body);
+        omniText.set(n?.name);
+        bodyText.set(n?.body);
       });
   };
 </script>
@@ -96,7 +98,7 @@
 
         <span class="meta" style={$selectedNote === note && 'background: #2252a0; color: white;'}>
           {formatDate(note.updatedAt)}
-          <!-- <button on:click={() => handleDeleteNote(note)}>[del]</button> -->
+          <button on:click={() => handleDeleteNote(note)} class="bg-transparent">[del]</button>
         </span>
       </li>
     {/each}
@@ -105,14 +107,13 @@
 
 <style>
   ul {
-    margin: 0;
+    margin: 0 6px 3px 6px;
     padding: 0;
-    width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
     background-color: var(--app-omni-background);
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    border-radius: 8px;
+    box-sizing: border-box;
   }
   li {
     display: flex;
