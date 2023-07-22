@@ -10,9 +10,9 @@
 
 <div class="h-screen w-screen overflow-hidden flex flex-col justify-center items-center {$fullScreen ? '' : 'p-2'}">
 
-    <div class="transition-all absolute text-center" style="top: 1%; {$fullScreen ? 'opacity: 0; top: -100px;' : 'opacity: 1;' }">
-      <h1>nvAux</h1>
-      <p>Capture and retrieve ideas at the speed of thought with nvAux, the in-the-zone, aint-nobody-stopping-me note-taking app for creative professionals.</p>
+    <div class="transition-all text-center" style="{$fullScreen ? 'opacity: 0; height: 0;' : 'height: 230px;' }">
+      <h1 style="opacity: 0.9; text-shadow: 1px 3px 5px rgba(0,0,0,0.5);">nvAux</h1>
+      <p>Capture and retrieve ideas at the speed of thought with nvAux, the in-the-zone note-taking app for creative professionals.</p>
     </div>
 
   <main
@@ -29,16 +29,18 @@
 
 <style>
   h1 {
-    font-size: 60px;
+    font-size: 69px;
+    line-height: 0;
     font-weight: 600;
     font-family:Arial, Helvetica, sans-serif;
-    margin-bottom: 0;
+    margin-bottom: 50px;
   }
   p {
     max-width: 500px;
-    margin-bottom: 60px;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 24px;
+    padding: 0 20px;
+    opacity: 0.6;
   }
   main.fullscreen {
     max-width: 100%;
