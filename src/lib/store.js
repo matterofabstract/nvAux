@@ -13,7 +13,7 @@ import { schema } from './schema';
 
 const storedNoteListHeight = localStorage.getItem('noteListHeight') || 220;
 const storedFullScreen = JSON.parse(localStorage.getItem('fullScreen')) || false;
-const storedMaximumFullScreen = JSON.parse(localStorage.getItem('maximumFullScreen')) || false;
+const storedMaximumFullScreen = JSON.parse(localStorage.getItem('maximumFullScreen')) || true;
 const storedShowClock = JSON.parse(localStorage.getItem('showClock')) || "true";
 
 /**
