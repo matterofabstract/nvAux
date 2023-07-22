@@ -3,7 +3,7 @@
   import { onMount } from 'svelte';
   import { RxDBUpdatePlugin } from 'rxdb/plugins/update';
 
-  import { db, selectedNote, bodyText } from './store';
+  import { selectedNote, bodyText } from './store';
 
   import { debounce } from '../utils/debounce';
   import { isEmptyObject } from '../utils/isEmptyObject';
@@ -11,29 +11,30 @@
   import Settings from './Settings.svelte';
 
   let innerHeight;
-  let db$;
+  let note;
 
   onMount(async () => {
     addRxPlugin(RxDBUpdatePlugin);
-    db$ = await db();
-    db$.notes.findOne($selectedNote.guid).exec();
   });
 
-  const handleDebounceSave = debounce(() => !isEmptyObject($selectedNote) && updateNote(), 500);
+  const handleDebounceSave = debounce(() => updateNote(), 1000);
 
   const updateNote = async () => {
-    await $selectedNote.update({
-      $set: {
-        body: $bodyText,
-        updatedAt: new Date().getTime(),
-      },
+    // @ts-ignore
+    await $selectedNote.incrementalModify((data) => {
+      data.body = $bodyText;
+      data.updatedAt = new Date().getTime();
+      return data;
     });
   };
 </script>
 
 <svelte:window bind:innerHeight />
 
-<div class="relative overflow-hidden h-full overflow-y-auto" style="margin-bottom: 35px; background: var(--app-notedetail-background);">
+<div
+  class="relative overflow-hidden h-full overflow-y-auto"
+  style="margin-bottom: 35px; background: var(--app-notedetail-background);"
+>
   {#if isEmptyObject($selectedNote)}
     <div class="relative w-full h-full flex items-center justify-center">
       <h2 style="font-size: 18px; color: #525962">No Note Selected</h2>
@@ -45,7 +46,7 @@
       id="body-editor"
       class="block w-full h-full relative no-resize border-0 outline-none border-box bg-transparent"
       bind:value={$bodyText}
-      on:keydown={handleDebounceSave}
+      on:keyup={handleDebounceSave}
     />
   {/if}
 </div>
