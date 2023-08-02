@@ -17,21 +17,23 @@
 </script>
 
 <div
-  class="status-bar px-2 flex absolute w-full flex-grow-0 transition-all"
-  style="font-size: 12px;  background: var(--app-statusbar-background); bottom: 0; left: 0; color: #606060; border-top: 1px solid var(--app-statusbar-border);"
+  class="status-bar px-2 items-center flex absolute w-full flex-grow-0 transition-all"
+  style="font-size: 12px;  background: var(--app-statusbar-background); bottom: 0; left: 0; color: #606060; border-top: 1px solid var(--app-statusbar-border); height: {$fullScreen ? '45px' : '34px'};"
 >
-  <div class="flex-grow">nvAux v0.1.5-20230719-032</div>
+  <div class="flex-grow flex items-center">nvAux v0.1.5-20230719-032</div>
   <div>
     <button on:click={() => $fullScreen = !$fullScreen} style="margin-right: 10px; color: #ed0178" class="bg-transparent flex items-center outline-none">
-      {#if $fullScreen}
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minimize"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path></svg>
-      {:else}
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-maximize"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
-      {/if}
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minimize">
+        {#if $fullScreen}
+          <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path>
+        {:else}
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+        {/if}
+      </svg>
     </button>
   </div>
   {#if $showClock}
-     <div>{format(time, 'hh:mm:ss a')}</div>
+    <div class="flex items-center">{format(time, 'hh:mm:ss a')}</div>
   {/if}
 </div>
 
@@ -39,7 +41,6 @@
 <style>
  @media screen and (max-width: 768px) {
     .status-bar {
-      height: 65px;
       align-items: start;
       padding-top: 10px;
     }
@@ -47,7 +48,6 @@
 
   @media screen and (min-width: 769px) {
     .status-bar {
-      height: 35px;
       align-items: center;
     }
   }

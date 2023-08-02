@@ -10,7 +10,7 @@
 
 <div class="h-screen w-screen overflow-hidden flex flex-col justify-center items-center {$fullScreen ? '' : 'p-2'}">
 
-    <div class="transition-all text-center" style="{$fullScreen ? 'opacity: 0; height: 0;' : 'height: 230px;' }">
+    <div class="transition-all text-center" style="{$fullScreen ? 'opacity: 0; height: 0;' : 'height: 200px;' }">
       <div style="perspective: {$fullScreen ? '0' : '150'}px;" class="transition-all">
         <h1 style="opacity: 0.9; text-shadow: 1px 3px 5px rgba(0,0,0,0.5); transform: rotateX(11deg) rotateY(0deg); transform-style: preserve-3d;">nvAux</h1>
       </div>
@@ -38,7 +38,7 @@
     margin-bottom: 50px;
   }
   p {
-    max-width: 500px;
+    max-width: 540px;
     font-size: 15px;
     line-height: 24px;
     padding: 0 20px;
