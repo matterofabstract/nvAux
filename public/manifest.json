@@ -1,0 +1,13 @@
+{
+  "name": "nvAux",
+  "short_name": "nvAux",
+  "description": "the note-taking app for creative professionals",
+  "icons": [
+    { "src": "favicon.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "favicon.png", "type": "image/png", "sizes": "512x512" }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000",
+  "theme_color": "#181a1c"
+}
