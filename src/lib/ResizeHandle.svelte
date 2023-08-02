@@ -39,5 +39,6 @@
   class="w-full resize-bar select-none row-resize"
   style="background: var(--app-resizer-background); height: 15px;"
   role="button"
+  aria-label="Resize Note List"
   tabindex="-1"
 />

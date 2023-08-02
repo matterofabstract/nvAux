@@ -86,6 +86,7 @@
         <span
           class="elipsis"
           role="button"
+          aria-label="Note Preview"
           tabindex="-1"
           on:dblclick={() => document.getElementById('body-editor').focus()}
         >
