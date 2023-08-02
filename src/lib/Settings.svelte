@@ -52,6 +52,7 @@
       <div class="font-bold">Dangerzone</div>
 
       <button
+        aria-label="Reset Database"
         on:click={handleDeleteCollection}
         class="btn"
         style="background: #b41111; margin-top: 10px;">Reset Database</button
