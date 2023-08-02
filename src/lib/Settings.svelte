@@ -60,11 +60,13 @@
   </div>
 
   <div class="text-center" style="padding-bottom: 300px;">
-    <p style="margin-top: 100px; text-align: center; color: #5c6269; font-size: 11px;">
-      Designed and Built by
+    <p class="items-center flex" style="margin-top: 100px; text-align: center; color: #5c6269; font-size: 11px;  flex-wrap: wrap;">
+      <span>Designed and Built by</span>
       <span class="relative" style="display: inline-block; height: 30px; width: 80px; top: 13px;"><a href="https://abstractly.io" target="_blank">
-        <AbstractlyLogo />
-      </a></span> The Human Interface Company.
+        <span class="flex items-center">
+          <AbstractlyLogo />
+        </span>
+      </a></span> <span>The Human Interface Company.</span>
     </p>
     <p style="margin-top: 20px; color: #5c6269;">Hack on
       <a href="https://github.com/matterofabstract/nvaux" target="_blank" style="color: #33abc0; text-decoration: underline;">
