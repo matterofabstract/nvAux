@@ -11,8 +11,9 @@
   import { isEmptyObject } from '../utils/isEmptyObject';
 
   import Settings from './Settings.svelte';
+  import CanvasApp from './CanvasApp.svelte';
 
-  let innerHeight;
+  // let innerHeight;
 
   onMount(async () => {
     addRxPlugin(RxDBUpdatePlugin);
@@ -28,11 +29,15 @@
       return data;
     });
   };
+
+  let innerWidth, innerHeight;
 </script>
 
-<svelte:window bind:innerHeight />
+<!-- <svelte:window bind:innerHeight /> -->
 
 <div
+  bind:clientWidth={innerWidth}
+  bind:clientHeight={innerHeight}
   class="relative overflow-hidden h-full overflow-y-auto"
   style="margin-bottom: 35px; background: var(--app-notedetail-background);"
 >
@@ -42,6 +47,8 @@
     </div>
   {:else if $selectedNote.guid === '00000000-0000-0000-0000-000000000000'}
     <Settings />
+  {:else if $selectedNote.guid === '00000000-0000-0000-0000-111111111111'}
+    <CanvasApp wrapperWidth={innerWidth} wrapperHeight={innerHeight} />
   {:else}
     <textarea
       id="body-editor"

@@ -73,7 +73,15 @@ Don't forget to follow the project on 𝕏 at @nvAuxApp and let us know what you
       createdAt: new Date().getTime(),
       updatedAt: new Date().getTime()
     });
+    await db.notes.insert({
+      guid: '00000000-0000-0000-0000-111111111111',
+      name: 'Sketch Pad Demo',
+      body: 'Use this demo note to test out the sketch pad feature.',
+      createdAt: new Date().getTime(),
+      updatedAt: new Date().getTime()
+    });
   };
+
 
   dbPromise = db;
   return db;
