@@ -1,4 +1,6 @@
 <script>
+  // @ts-nocheck
+
   import { addRxPlugin } from 'rxdb';
   import { onMount } from 'svelte';
   import { RxDBUpdatePlugin } from 'rxdb/plugins/update';
@@ -11,17 +13,16 @@
   import Settings from './Settings.svelte';
 
   let innerHeight;
-  let note;
 
   onMount(async () => {
     addRxPlugin(RxDBUpdatePlugin);
   });
 
-  const handleDebounceSave = debounce(() => updateNote(), 1000);
+  const handleDebounceSave = debounce(() => updateNote(), 300);
 
   const updateNote = async () => {
     // @ts-ignore
-    await $selectedNote.incrementalModify((data) => {
+    await $selectedNote?.incrementalModify((data) => {
       data.body = $bodyText;
       data.updatedAt = new Date().getTime();
       return data;

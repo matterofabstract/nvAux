@@ -4,15 +4,16 @@
 
   import IconXcircle from './IconXcircle.svelte';
 
-  import { omniMode, omniText, selectedNote, db } from './store';
+  import { omniMode, omniText, selectedNote, db, bodyText } from './store';
 
-  let omniInput, showMenu;
+  let omniInput;
 
   onMount(() => omniInput.focus());
 
   const clearSelection = (e) => {
     if (e.keyCode === 27) {
       omniText.set('');
+      bodyText.set('');
       omniInput.focus();
     }
   };
@@ -24,18 +25,35 @@
 
   const addNote = async () => {
     const db$ = await db();
-    await db$.notes
-      .insert({
-        guid: uuidv4(),
-        name: $omniText,
-        createdAt: new Date().getTime(),
-        updatedAt: new Date().getTime(),
-      })
-      .then((note) => {
+    await db$.notes.findOne({ selector: { name: $omniText } }).exec().then((note) => {
+      omniMode.set('edit');
+      if (note) {
+        console.log('note found so lets edit it note: ', note);
         selectedNote.set(note);
-        omniMode.set('edit');
-      })
-      .then(() => document.getElementById('body-editor').focus());
+        omniText.set(note.name);
+        bodyText.set(note.body);
+        return;
+      } else {
+        console.log('no note found so lets create one');
+        db$.notes
+          .insert({
+            guid: uuidv4(),
+            name: $omniText,
+            createdAt: new Date().getTime(),
+            updatedAt: new Date().getTime(),
+          })
+          .then((note) => {
+            selectedNote.set(note);
+            omniMode.set('edit');
+            bodyText.set('');
+          });
+        return;
+      }
+    }).then(
+      setTimeout(() => {
+        document.getElementById('body-editor')?.focus();
+      }, 50),
+    );
   };
 </script>
 

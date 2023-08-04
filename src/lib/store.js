@@ -42,14 +42,19 @@ const _create = async () => {
       db.notes.insert({
         guid: '11111111-1111-1111-1111-111111111111',
         name: '🚀 Welcome to nvAux!',
-        body: `Welcome and thank you for taking interest in nvAux!
+        body: `Welcome and thank you for using nvAux!
 
-This is a web-based note-taking app inspired by nvALT. A few important things to note:
+This is a web-based note-taking app inspired by nvALT where searching and creating notes is one in the same action. A few things to keep in-mind:
 
-* All your notes are stored locally in your browser.
-* Expect bugs, dead-ends, and missing features as it's still early in development.
-* Do no trust your data here yet. Testing purposes only.
-* 'Add to Home Screen' to feel more app-like.
+* All your notes are stored within your browser, locally (and unencrypted for now).
+* Do no trust your data here yet. Not production-ready. Thar be dragons.
+* 'Add to Home Screen' on iOS Safari for a native app-like experience.
+
+If you are interested in the development of nvAux the project is open-source and available on GitHub at https://github.com/matterofabstract/nvaux
+
+You can download your notes at any time by clicking the 'Download Notes' button in the nvAux settings screen.
+
+Don't forget to follow the project on 𝕏 at @nvAuxApp and let us know what you think!
   `,
         createdAt: new Date().getTime(),
         updatedAt: new Date().getTime()
@@ -64,7 +69,7 @@ This is a web-based note-taking app inspired by nvALT. A few important things to
     await db.notes.insert({
       guid: '00000000-0000-0000-0000-000000000000',
       name: '⚙️ nvAux Settings',
-      body: 'Set your nvAux Preferences here',
+      body: 'Adjust Your nvAux Preferences',
       createdAt: new Date().getTime(),
       updatedAt: new Date().getTime()
     });
