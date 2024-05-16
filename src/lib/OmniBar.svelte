@@ -76,7 +76,7 @@
     {#if $omniText !== ''}
       <button
         aria-label="Clear Search"
-        class="bg-transparent flex items-center px-2 py-1.5"
+        class="bg-transparent flex items-center px-2 leading-none"
         style="color: #404856;"
         on:click={() => {
           $omniText = '';
