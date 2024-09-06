@@ -1,6 +1,5 @@
 # nvAux
 
-
 Capture and retrieve ideas at the speed of thought with nvAux, the in-the-zone, aint-nobody-stopping-me note-taking app for creative professionals.
 
 
