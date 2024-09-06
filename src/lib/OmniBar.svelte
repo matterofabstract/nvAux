@@ -65,6 +65,7 @@
 >
   <div class="input-wrapper flex-grow flex items-center">
     <input
+      id="omni-input"
       bind:this={omniInput}
       bind:value={$omniText}
       on:keydown={handleTitleEnter}
@@ -81,6 +82,7 @@
         on:click={() => {
           $omniText = '';
           $selectedNote = '';
+          document.getElementById('omni-input').focus();
         }}
       >
         <IconXcircle />
