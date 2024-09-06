@@ -20,7 +20,7 @@
   class="status-bar px-2 items-center flex absolute w-full flex-grow-0 transition-all"
   style="font-size: 12px;  background: var(--app-statusbar-background); bottom: 0; left: 0; color: #606060; border-top: 1px solid var(--app-statusbar-border); height: {$fullScreen ? '45px' : '34px'};"
 >
-  <div class="flex-grow flex items-center">nvAux v0.1.5-20230719-032</div>
+  <div class="flex-grow flex items-center">nvAux v0.1.5-20240906-005</div>
   <div>
     <button on:click={() => $fullScreen = !$fullScreen} style="margin-right: 10px; color: {!$fullScreen ? '#ed0178' : '#818181'}" class="bg-transparent flex items-center outline-none transition-all">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minimize">
