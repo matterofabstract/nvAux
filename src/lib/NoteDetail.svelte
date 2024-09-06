@@ -11,7 +11,6 @@
   import { isEmptyObject } from '../utils/isEmptyObject';
 
   import Settings from './Settings.svelte';
-  import CanvasApp from './CanvasApp.svelte';
 
   // let innerHeight;
 
@@ -47,8 +46,6 @@
     </div>
   {:else if $selectedNote.guid === '00000000-0000-0000-0000-000000000000'}
     <Settings />
-  {:else if $selectedNote.guid === '00000000-0000-0000-0000-111111111111'}
-    <CanvasApp wrapperWidth={innerWidth} wrapperHeight={innerHeight} />
   {:else}
     <textarea
       id="body-editor"
