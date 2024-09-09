@@ -76,9 +76,9 @@
     />
     {#if $omniText !== ''}
       <button
+        type="button"
         aria-label="Clear Search"
-        class="bg-transparent flex items-center px-2 leading-none"
-        style="color: #404856;"
+        class="bg-transparent flex items-center px-2 leading-none outline-none"
         on:click={() => {
           $omniText = '';
           $selectedNote = '';
@@ -106,5 +106,11 @@
   }
   input::placeholder {
     color: #88959f;
+  }
+  button[type="button"] {
+    color: #404856;
+  }
+  button[type="button"]:hover {
+    color: #ffffff7d;
   }
 </style>

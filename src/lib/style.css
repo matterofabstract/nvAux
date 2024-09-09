@@ -125,3 +125,9 @@ body {
 		background-position: 0% 50%;
 	}
 }
+.transition-colors {
+  transition-property: color;
+  transition-duration: 300ms;
+  transition-timing-function: ease;
+}
+.outline-none { outline: none; }
